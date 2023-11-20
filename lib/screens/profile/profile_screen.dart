@@ -2,8 +2,6 @@
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
 import 'cubit/profile_cubit.dart';
@@ -48,6 +46,10 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(model!.data!.image!),
+                      radius: 50,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),

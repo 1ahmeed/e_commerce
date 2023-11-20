@@ -122,20 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            // Center(
-            //   child: SmoothPageIndicator(
-            //     controller: pageController,
-            //     count: HomeCubit.get(context)!.bannersData.length,
-            //     axisDirection: Axis.horizontal,
-            //     effect: const SlideEffect(
-            //         spacing: 2.0,
-            //         // radius: 10.0,
-            //         dotWidth: 15.0,
-            //         // dotHeight: 16.0,
-            //         paintStyle: PaintingStyle.stroke,
-            //         activeDotColor: secondColor),
-            //   ),
-            // ),
             const SizedBox(
               height: 15,
             ),
