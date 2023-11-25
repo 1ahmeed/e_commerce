@@ -25,34 +25,34 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
 
-        if(state is AddOrRemovingFromFavouritesSuccessState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 3),
-
-              content: Text(state.successMessage)));
-        }
-        else if(state is AddOrRemovingFromFavouritesFailedState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-              content: Text(state.errorMessage)));
-        }
-        if(state is AddOrRemovingFromCartSuccessState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 3),
-
-              content: Text(state.successMessage)));
-
-        }
-        else if(state is AddOrRemovingFromCartFailedState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-              content: Text(state.errorMessage)));
-
-        }
+        // if(state is AddOrRemovingFromFavouritesSuccessState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.green,
+        //       duration: const Duration(seconds: 3),
+        //
+        //       content: Text(state.successMessage)));
+        // }
+        // else if(state is AddOrRemovingFromFavouritesFailedState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.red,
+        //       duration: const Duration(seconds: 3),
+        //       content: Text(state.errorMessage)));
+        // }
+        // if(state is AddOrRemovingFromCartSuccessState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.green,
+        //       duration: const Duration(seconds: 3),
+        //
+        //       content: Text(state.successMessage)));
+        //
+        // }
+        // else if(state is AddOrRemovingFromCartFailedState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.red,
+        //       duration: const Duration(seconds: 3),
+        //       content: Text(state.errorMessage)));
+        //
+        // }
       },
       builder: (context, state) {
         return Scaffold(

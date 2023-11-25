@@ -223,13 +223,13 @@ class HomeCubit extends Cubit<HomeState> {
           //get data
         }else{
           //emit false
-          emit(GetCartFailedStatState(errorMessage: responseData['message']));
+          emit(GetCartFailedState(errorMessage: responseData['message']));
         }
       }
     } catch (e) {
       // print(e.toString());
       // emit false
-      emit(GetCartFailedStatState(errorMessage: e.toString()));
+      emit(GetCartFailedState(errorMessage: e.toString()));
     }
   }
 
@@ -251,6 +251,7 @@ class HomeCubit extends Cubit<HomeState> {
         if(responseData['status']==true){
           //success
           changeCartData=ChangeCartData.fromJson(responseData['data']['product']);
+          print(responseData['data']['quantity']);
           await getCarts();
           emit(AddOrRemovingFromCartSuccessState(successMessage: responseData['message']));
         }else{
@@ -263,6 +264,43 @@ class HomeCubit extends Cubit<HomeState> {
       cartsId[productId] = !cartsId[productId]!;
       // failed
       emit(AddOrRemovingFromCartFailedState(errorMessage: e.toString()));
+    }
+  }
+
+  void updateCart({
+  required int cartId,
+  required int quantity
+})async{
+    print("update");
+    emit(UpdateCartLoadingState());
+
+    try {
+      Response response=await http.put(Uri.parse("https://student.valuxapps.com/api/carts/$cartId"),
+        body:{
+          "quantity":quantity.toString()
+        } ,
+        headers: {
+          "lang":"en",
+          "Authorization":token!
+        },
+      );
+      var responseData=jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+          // emit success
+          getCarts();
+          emit(UpdateCartSuccessState());
+        }else{
+          print(responseData['message']);
+          ///emit error
+          emit(UpdateCartFailedState(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+
+      print(e.toString());
+      emit(UpdateCartFailedState(errorMessage: e.toString()));
+     ///emit error
     }
   }
 
@@ -298,12 +336,6 @@ class HomeCubit extends Cubit<HomeState> {
 //    emit(SearchFailedState(e.toString()));
 //   }
 //   }
-
-
-
-
-
-
 
 
 }

@@ -22,20 +22,20 @@ class BuildProductItems extends StatelessWidget {
       listener: (context, state) {
       },
       builder: (context, state) {
-        return InkWell(
-          onTap: (){
-            Navigator.push(context,  MaterialPageRoute(builder: (context) => ProductDetailsScreen(
-              productsData: productsData,
-            ),));
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.bottomCenter,
-              children: [
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.bottomCenter,
+            children: [
 
-                Container(
+              InkWell(
+                onTap: (){
+                  Navigator.push(context,  MaterialPageRoute(builder: (context) => ProductDetailsScreen(
+                    productsData: productsData,
+                  ),));
+                },
+                child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.grey,
@@ -145,26 +145,26 @@ class BuildProductItems extends StatelessWidget {
                     ],
                   ),
                 ),
-                Positioned(
-                  bottom: -15,
-                  child: InkWell(
-                    onTap: () {
+              ),
+              Positioned(
+                bottom: -15,
+                child: InkWell(
+                  onTap: () {
 
-                      HomeCubit.get(context)!.addOrRemoveFromCart(productId: productsData!.id!);
+                    HomeCubit.get(context)!.addOrRemoveFromCart(productId: productsData!.id!);
 
-                    },
-                    child:  CircleAvatar(
-                      radius: 20,
-                      backgroundColor: HomeCubit.get(context)!.cartsId[productsData!.id]!?
-                      Colors.green:Colors.black38,
-                      child: const Icon(Icons.shopping_cart,
-                        color: Colors.white,
-                      ),
+                  },
+                  child:  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: HomeCubit.get(context)!.cartsId[productsData!.id]!?
+                    Colors.green:Colors.black38,
+                    child: const Icon(Icons.shopping_cart,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

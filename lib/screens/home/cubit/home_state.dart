@@ -65,9 +65,17 @@ class AddOrRemovingFromCartFailedState extends HomeState {
 
 class GetCartLoadingState extends HomeState {}
 class GetCartSuccessState extends HomeState {}
-class GetCartFailedStatState extends HomeState {
+class GetCartFailedState extends HomeState {
   final String? errorMessage;
 
-  GetCartFailedStatState({this.errorMessage});
+  GetCartFailedState({this.errorMessage});
+}
+
+class UpdateCartLoadingState extends HomeState {}
+class UpdateCartSuccessState extends HomeState {}
+class UpdateCartFailedState extends HomeState {
+  final String? errorMessage;
+
+  UpdateCartFailedState({this.errorMessage});
 }
 

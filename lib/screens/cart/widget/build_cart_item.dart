@@ -1,14 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce/core/utils/colors.dart';
 import 'package:e_commerce/models/carts/cart_model.dart';
 import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
 import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BuildCartItem extends StatelessWidget {
-   const BuildCartItem({Key? key, required this.cartItems,})
+class BuildCartItem extends StatefulWidget {
+    BuildCartItem({Key? key, required this.cartItems,})
       : super(key: key);
    final CartItems? cartItems;
+
+
+  @override
+  State<BuildCartItem> createState() => _BuildCartItemState();
+}
+
+class _BuildCartItemState extends State<BuildCartItem> {
+ late int quantity=widget.cartItems!.quantity!;
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +40,16 @@ class BuildCartItem extends StatelessWidget {
                   CachedNetworkImage(
                     width: 100,
                     height: 130,
-                    imageUrl: cartItems!.product!.image.toString(),
+                    imageUrl: widget.cartItems!.product!.image.toString(),
                     fit: BoxFit.fill,
                     errorWidget: (context, url, error) =>
                     const Icon(Icons.error_outline),
                     placeholder: (context, url) =>
                     const Center(child: CircularProgressIndicator()),
                   ),
-                  if (cartItems!.product!.discount != 0 &&
-                      cartItems!.product!.discount !=
-                          cartItems!.product!.price)
+                  if (widget.cartItems!.product!.discount != 0 &&
+                      widget.cartItems!.product!.discount !=
+                          widget.cartItems!.product!.price)
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       color: Colors.red,
@@ -59,7 +68,7 @@ class BuildCartItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      cartItems!.product!.name!,
+                      widget.cartItems!.product!.name!,
                       maxLines: 2,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -74,19 +83,19 @@ class BuildCartItem extends StatelessWidget {
                         FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "${cartItems!.product!.price!} \$",
+                              "${widget.cartItems!.product!.price!} \$",
                               style: const TextStyle(fontSize: 13),
                             )),
                         const SizedBox(
                           width: 5,
                         ),
-                        if (cartItems!.product!.discount != 0 &&
-                            cartItems!.product!.discount !=
-                                cartItems!.product!.price)
+                        if (widget.cartItems!.product!.discount != 0 &&
+                            widget.cartItems!.product!.discount !=
+                                widget.cartItems!.product!.price)
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "${cartItems!.product!.oldPrice!} \$",
+                              "${widget.cartItems!.product!.oldPrice!} \$",
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 12.5,
@@ -98,13 +107,72 @@ class BuildCartItem extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
+                    ///row add minus count
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap:(){
+                            setState(() {
+                              quantity ++;
+                            });
+                            HomeCubit.get(context)!.updateCart(
+                                cartId: widget.cartItems!.id!,
+                                quantity: quantity);
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: mainColor,
+                            ),
+
+                            child: const Center(
+                              child:  Icon(Icons.add,color: Colors.white,),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text("$quantity"),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        InkWell(
+                          onTap:(){
+                            setState(() {
+                              quantity--;
+                            });
+                            HomeCubit.get(context)!.updateCart(
+                                cartId: widget.cartItems!.id!,
+                                quantity: quantity);
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: mainColor,
+                            ),
+
+                            child: const Center(
+                              child:  Icon(Icons.remove,color: Colors.white,),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     Row(
                       children: [
                         OutlinedButton(onPressed: (){
                           HomeCubit.get(context)!.addOrRemoveFromFavourite(
-                              productId:cartItems!.product!.id!);
+                              productId:widget.cartItems!.product!.id!);
                         },
-                            child:HomeCubit.get(context)!.favouritesId[cartItems!.product!.id]! ?
+                            child:HomeCubit.get(context)!.favouritesId[widget.cartItems!.product!.id] !=null ?
                             const Icon(Icons.favorite_outlined,color: Colors.red,):
                             const Icon(Icons.favorite_border_outlined,color: Colors.grey,)
                         ),
@@ -117,7 +185,7 @@ class BuildCartItem extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15)),
                           onPressed: () {
                             // Add | remove product favorites
-                            HomeCubit.get(context)!.addOrRemoveFromCart(productId:cartItems!.product!.id!);
+                            HomeCubit.get(context)!.addOrRemoveFromCart(productId:widget.cartItems!.product!.id!);
                           },
                           child: const Text("Remove"),
                         )

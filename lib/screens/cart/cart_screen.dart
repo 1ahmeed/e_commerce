@@ -13,38 +13,39 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        if(state is AddOrRemovingFromFavouritesSuccessState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 3),
-
-              content: Text(state.successMessage)));
-        }
-        else if(state is AddOrRemovingFromFavouritesFailedState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-              content: Text(state.errorMessage)));
-        }
-        if(state is AddOrRemovingFromCartSuccessState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 3),
-
-              content: Text(state.successMessage)));
-
-        }
-        else if(state is AddOrRemovingFromCartFailedState){
-          ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-              content: Text(state.errorMessage)));
-
-        }
+        // if(state is AddOrRemovingFromFavouritesSuccessState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.green,
+        //       duration: const Duration(seconds: 3),
+        //
+        //       content: Text(state.successMessage)));
+        // }
+        // else if(state is AddOrRemovingFromFavouritesFailedState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.red,
+        //       duration: const Duration(seconds: 3),
+        //       content: Text(state.errorMessage)));
+        // }
+        // if(state is AddOrRemovingFromCartSuccessState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.green,
+        //       duration: const Duration(seconds: 3),
+        //
+        //       content: Text(state.successMessage)));
+        //
+        // }
+        // else if(state is AddOrRemovingFromCartFailedState){
+        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+        //       backgroundColor: Colors.red,
+        //       duration: const Duration(seconds: 3),
+        //       content: Text(state.errorMessage)));
+        //
+        // }
       },
       builder: (context, state) {
         return Scaffold(
-          body: HomeCubit.get(context)!.cartModel !=null?Padding(
+          body: HomeCubit.get(context)!.cartModel !=null?
+          Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -71,13 +72,13 @@ class CartScreen extends StatelessWidget {
 
                     decoration: BoxDecoration(
                         color: mainColor,
-                      borderRadius: BorderRadius.circular(25)
+                      borderRadius: BorderRadius.circular(10)
                     ),
 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Total:  ", style: TextStyle(color:  Colors.white,fontSize: 20),),
+                        const Text("Total :  ", style: TextStyle(color:  Colors.white,fontSize: 20),),
                         Text(
                           "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(color:  Colors.white,fontSize: 20),),
                       ],

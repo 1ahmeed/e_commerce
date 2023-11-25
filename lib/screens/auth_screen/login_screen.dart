@@ -156,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                                   )),
                                   InkWell(
                                     onTap:(){
-                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
                                     } ,
                                     child: const Text("Click Here",style: TextStyle(color: mainColor,fontWeight: FontWeight.bold,fontSize: 12)),
                                   ),
