@@ -7,8 +7,8 @@ import '../profile/cubit/profile_cubit.dart';
 import '../profile/cubit/profile_states.dart';
 
 
-class HelpScreen extends StatelessWidget {
-  HelpScreen({Key? key}) : super(key: key);
+class ContactUs extends StatelessWidget {
+  ContactUs({Key? key}) : super(key: key);
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();

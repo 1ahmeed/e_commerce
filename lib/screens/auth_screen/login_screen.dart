@@ -113,6 +113,7 @@ class LoginScreen extends StatelessWidget {
                                   controller: passwordController,
                                   keyboard: TextInputType.visiblePassword,
                                   hintText: "Password",
+                                  maxLines: 1,
                                   suffixIcon: AuthCubit.get(context)?.suffix,
                                   suffixPressed: () {
                                     AuthCubit.get(context)?.changeVisibility();

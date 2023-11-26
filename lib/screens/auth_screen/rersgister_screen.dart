@@ -115,6 +115,7 @@ final passwordController=TextEditingController();
                           },
                           isPassword:
                           AuthCubit.get(context)!.isPassword,
+                          maxLines: 1,
                           validate: (value) {
                             if (value!.isEmpty) {
                               return "please enter your password";

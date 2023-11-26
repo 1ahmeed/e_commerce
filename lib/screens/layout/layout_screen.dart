@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:iconly/iconly.dart';
 
-import '../help/help_screen.dart';
+import '../contact_us/contact_us_screen.dart';
 import '../profile/profile_screen.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -94,7 +94,7 @@ class LayoutScreen extends StatelessWidget {
                     ListTile(
                       onTap: () {
                         Navigator.push(context,MaterialPageRoute(builder:
-                            (context) => HelpScreen(),) );
+                            (context) => ContactUs(),) );
                       },
                       leading: const Icon(
                         IconlyBold.user_3,
