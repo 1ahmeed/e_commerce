@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:iconly/iconly.dart';
 
+import '../help/help_screen.dart';
 import '../profile/profile_screen.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -54,16 +55,15 @@ class LayoutScreen extends StatelessWidget {
 
                     ListTile(
                       onTap: () {
-                        ///change password
+                        ///profile screen
                         Navigator.push(context, MaterialPageRoute(builder:
                             (context) => ProfileScreen(),) );
-                        //navigateTo(context, FavoriteWordsRoute(favoriteItems:books2,));
                       },
                       leading: const Icon(
                         Icons.person,
                       ),
                       title: const Text(
-                        'ProfileScreen',
+                        'Profile',
                         style:  TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -76,7 +76,6 @@ class LayoutScreen extends StatelessWidget {
                         ///change password
                         Navigator.push(context,MaterialPageRoute(builder:
                             (context) => ChangePasswordScreen(),) );
-                        //navigateTo(context, FavoriteWordsRoute(favoriteItems:books2,));
                       },
                       leading: const Icon(
                         Icons.lock,
@@ -90,31 +89,24 @@ class LayoutScreen extends StatelessWidget {
                     ),
                     //const SizedBox(height: 16),
 
-                    ///About us
-                    //
-                    // ListTile(
-                    //   onTap: () {
-                    //     navigateTo(context, const AboutUsScreen());
-                    //   },
-                    //   leading: const Icon(
-                    //     IconlyBold.user_3,
-                    //   ),
-                    //   title: Text(
-                    //     'معلوماتنا',
-                    //     style: const TextStyle(
-                    //       fontWeight: FontWeight.bold,
-                    //     ),
-                    //   ),
-                    // ),
-                    //
-                    //
-                    // const SizedBox(height: 16),
-                    // //الخطوط
-                    // const SizedBox(height: 16),
-                    // defaultLine(),
-                    // const SizedBox(height: 5),
-                    // defaultLine(),
-                    // const SizedBox(height: 16),
+                    ///Help
+
+                    ListTile(
+                      onTap: () {
+                        Navigator.push(context,MaterialPageRoute(builder:
+                            (context) => HelpScreen(),) );
+                      },
+                      leading: const Icon(
+                        IconlyBold.user_3,
+                      ),
+                      title: const Text(
+                        'Help',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                     const SizedBox(height: 16),
                     ///تسجيل خروج من الايميل
                     ListTile(
                       onTap: () {

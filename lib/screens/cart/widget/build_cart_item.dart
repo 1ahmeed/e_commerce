@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BuildCartItem extends StatefulWidget {
-    BuildCartItem({Key? key, required this.cartItems,})
+    const BuildCartItem({Key? key, required this.cartItems,})
       : super(key: key);
    final CartItems? cartItems;
 

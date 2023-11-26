@@ -19,7 +19,8 @@ class CustomTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.focusedBorder,
     this.border,
-    this.hintText
+    this.hintText,
+    this.maxLines
   });
 
   final TextEditingController controller;
@@ -40,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? border;
   final Color? colorIcon;
   final String? hintText;
+  final int? maxLines;
 
   // Color? colorBorder;
 
@@ -55,7 +57,9 @@ class CustomTextFormField extends StatelessWidget {
       onTap: onTap,
       // cursorColor: Colors.teal,
       validator: validate,
+      maxLines:maxLines ,
       decoration: InputDecoration(
+
         hintText:hintText ,
         labelStyle: const TextStyle(),
         enabledBorder: enabledBorder,

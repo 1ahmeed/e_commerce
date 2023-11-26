@@ -2,9 +2,6 @@ import 'package:e_commerce/screens/home/widget/build_product_item.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../core/constant.dart';
-import '../../core/local_data.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_state.dart';
 

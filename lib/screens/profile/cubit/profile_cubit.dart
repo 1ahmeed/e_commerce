@@ -141,5 +141,41 @@ class ProfileCubit extends Cubit<ProfileStates> {
     suffix2=isPassword2? Icons.visibility:Icons.visibility_off;
     emit(ChangeVisibilitySuccessState());
   }
+  
+  void sendReportFromUserToAdmin({
+  required String name,
+  required String email,
+  required String phone,
+  required String message,
+})async{
+    emit(SendMessageLoadingStates());
+    try {
+      Response response =await http.post(Uri.parse("https://student.valuxapps.com/api/complaints"),
+      headers: {
+        "lang":"ar",
+      },
+        body: {
+        "name":name,
+        "phone":phone,
+        "email":email,
+        "message":message,
+        },
+      );
+      var responseData=jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+          ///emit success
+          emit(SendMessageSuccessStates(successMessage: responseData['message']));
+        }else{
+          ///eit failed
+          emit(SendMessageFailedStates(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+      emit(SendMessageFailedStates(errorMessage: e.toString()));
+
+    }
+}
 
 }

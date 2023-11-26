@@ -39,4 +39,14 @@ class ChangePasswordFailedStates extends ProfileStates{
 
 class ChangeVisibilitySuccessState extends ProfileStates{}
 
+class SendMessageLoadingStates extends ProfileStates{}
+class SendMessageSuccessStates extends ProfileStates{
+  final String successMessage;
 
+  SendMessageSuccessStates({required this.successMessage});
+}
+class SendMessageFailedStates extends ProfileStates{
+  final String errorMessage;
+
+  SendMessageFailedStates({required this.errorMessage});
+}

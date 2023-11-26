@@ -1,26 +1,27 @@
-
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
-import 'cubit/profile_cubit.dart';
-import 'cubit/profile_states.dart';
+import '../profile/cubit/profile_cubit.dart';
+import '../profile/cubit/profile_states.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+
+class HelpScreen extends StatelessWidget {
+  HelpScreen({Key? key}) : super(key: key);
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
+  final messageController = TextEditingController();
   final formKey=GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileCubit, ProfileStates>(
       listener: (context, state) {
-        if(state is UpdateUserDataSuccessStates){
+        if(state is SendMessageSuccessStates){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.green,
+              backgroundColor: Colors.green,
               content:Text(state.successMessage)
           ));
         }else if(state is UpdateUserDataFailedStates){
@@ -39,27 +40,22 @@ class ProfileScreen extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Profile"),
+            title: const Text("Help"),
             elevation: 0,
             foregroundColor: mainColor,
             backgroundColor: Colors.transparent,
           ),
-            body: ProfileCubit.get(context)!.profileModel != null
-                ? Padding(
-              padding: const EdgeInsets.only(left: 20.0,right: 20.0,top: 10),
-              child: Form(
-                key: formKey,
+          body: ProfileCubit.get(context)!.profileModel != null
+              ? Padding(
+            padding: const EdgeInsets.only(left: 20.0,right: 20.0,),
+            child: Form(
+              key: formKey,
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(model!.data!.image!),
-                      radius: 50,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 30,),
                     CustomTextFormField(
+                      isClickable: false,
                       border: const OutlineInputBorder(),
                       controller: nameController,
                       keyboard: TextInputType.name,
@@ -76,6 +72,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
+                      isClickable: false,
                       border: const OutlineInputBorder(),
 
                       controller: emailController,
@@ -93,6 +90,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
+                      isClickable: false,
                       border: const OutlineInputBorder(),
                       controller: phoneController,
                       keyboard: TextInputType.phone,
@@ -108,28 +106,55 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+                    TextFormField(
+                  controller: messageController,
+                  keyboardType: TextInputType.text,
+                  // onFieldSubmitted: onSubmit,
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter your message ';
+                    }
+                    return null;
+                  },
+                  maxLines:5 ,
+                  decoration: const InputDecoration(
+
+                    hintText:"Enter your Message" ,
+                    labelStyle: TextStyle(),
+
+                    labelText:  'Note',
+
+                     border: OutlineInputBorder(),
+                  ),
+                ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     CustomButton(
-                      background: mainColor,
+                        background: mainColor,
                         function: () {
                           if (formKey.currentState!.validate()) {
-                            ProfileCubit.get(context)?.updateUserData(
+                            ProfileCubit.get(context)?.sendReportFromUserToAdmin(
+                              message: messageController.text,
                               name: nameController.text,
                               phone: phoneController.text,
                               email: emailController.text,
                             );
+                            messageController.clear();
                           }
                         },
-                        text:state is UpdateUserDataLoadingStates? 'Loading Update....':'Update'
+                        text:state is SendMessageLoadingStates? 'Wait....':'Send'
                     ),
 
 
                   ],
                 ),
               ),
-            )
-                : const  Center(
-                  child: CircularProgressIndicator(),
-                ),
+            ),
+          )
+              : const  Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
     );
