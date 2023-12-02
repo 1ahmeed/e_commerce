@@ -79,3 +79,46 @@ class UpdateCartFailedState extends HomeState {
   UpdateCartFailedState({this.errorMessage});
 }
 
+class GetAddressLoadingState extends HomeState {}
+class GetAddressSuccessState extends HomeState {}
+class GetAddressFailedState extends HomeState {
+  final String? errorMessage;
+
+  GetAddressFailedState({this.errorMessage});
+}
+
+class DeleteAddressLoadingState extends HomeState {}
+class DeleteAddressSuccessState extends HomeState {
+  final String successMessage;
+
+  DeleteAddressSuccessState({required this.successMessage});
+}
+class DeleteAddressFailedState extends HomeState {
+  final String? errorMessage;
+
+  DeleteAddressFailedState({this.errorMessage});
+}
+
+class UpdateAddressLoadingState extends HomeState {}
+class UpdateAddressSuccessState extends HomeState {
+  final String successMessage;
+
+  UpdateAddressSuccessState({required this.successMessage});
+}
+class UpdateAddressFailedState extends HomeState {
+  final String? errorMessage;
+
+  UpdateAddressFailedState({this.errorMessage});
+}
+
+class AddAddressLoadingState extends HomeState {}
+class AddAddressSuccessState extends HomeState {
+  final String successMessage;
+
+  AddAddressSuccessState({required this.successMessage});
+}
+class AddAddressFailedState extends HomeState {
+  final String? errorMessage;
+
+  AddAddressFailedState({this.errorMessage});
+}

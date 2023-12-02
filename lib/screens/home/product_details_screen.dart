@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/core/utils/colors.dart';
+import 'package:e_commerce/screens/cart/cart_screen.dart';
 import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
 import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
@@ -163,15 +164,36 @@ class ProductDetailsScreen extends StatelessWidget {
                         const Icon(Icons.favorite_outlined,color: Colors.red,):
                         const Icon(Icons.favorite_border_outlined,color: Colors.grey,)
                     ),
+                    const SizedBox(width: 20,),
+                    if(HomeCubit.get(context)!.cartsId[productsData!.id] ==true)
+                      Expanded(
+                        child: SizedBox(
+                          height: 40,
+                          child: MaterialButton(
+                              color: Colors.green,
+                              onPressed: (){
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => const CartScreen(),));
+                                // HomeCubit.get(context)!.addOrRemoveFromCart(productId:productsData!.id!);
 
-                    OutlinedButton(onPressed: (){
-                      HomeCubit.get(context)!.addOrRemoveFromCart(productId:productsData!.id!);
+                              },
+                              child:const Text("Go To Cart",style: TextStyle(color: Colors.white),)),
+                        ),
+                      ),
+                    if(HomeCubit.get(context)!.cartsId[productsData!.id] ==false)
+                      Expanded(
+                      child: SizedBox(
+                        height: 40,
+                        child: MaterialButton(
 
-                    },
-                        child:HomeCubit.get(context)!.cartsId[productsData!.id]! ?
-                        const Icon(Icons.shopping_cart,color: Colors.green,):
-                        const Icon(Icons.shopping_cart,color: Colors.grey,)
-                    ),
+                          color: Colors.green,
+                            onPressed: (){
+                            HomeCubit.get(context)!.addOrRemoveFromCart(productId:productsData!.id!);
+
+                            },
+                            child:const Text("Add To Cart",style: TextStyle(color: Colors.white),)),
+                      ),
+                    )
 
                   ],
                 ),

@@ -60,6 +60,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       return null;
                     },
                     label: 'old password',
+                    maxLines: 1,
                   ),
                   const SizedBox(
                     height: 20,
@@ -80,6 +81,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       return null;
                     },
                     label: 'new password',
+                    maxLines: 1,
                   ),
                   const SizedBox(
                     height: 20,

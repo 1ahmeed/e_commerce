@@ -172,7 +172,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
         }
       }
     } catch (e) {
-      print(e.toString());
+      // print(e.toString());
       emit(SendMessageFailedStates(errorMessage: e.toString()));
 
     }

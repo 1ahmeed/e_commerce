@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({super.key,
     required this.controller,
-    required this.keyboard,
-    required this.validate,
+     this.keyboard,
+     this.validate,
     this.onSubmit,
     this.onchange,
     this.onTap,
@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   });
 
   final TextEditingController controller;
-  final TextInputType keyboard;
+  final TextInputType? keyboard;
   final String? Function(String?)? validate;
   final void Function(String)? onSubmit;
   final void Function(String)? onchange;

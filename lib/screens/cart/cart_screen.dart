@@ -6,6 +6,8 @@ import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'order_address_screen.dart';
+
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
 
@@ -66,23 +68,36 @@ class CartScreen extends StatelessWidget {
                   )
 
                 ),
-                Container(
-                    height: 50,
-                    width: double.infinity,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Total :  ", style: TextStyle(color:  Colors.black,fontSize: 20),),
+                    Text(
+                      "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(color:  Colors.black,fontSize: 20),),
+                  ],
+                ),
+                const SizedBox(height: 20,),
+                if(HomeCubit.get(context)!.cartModel!.data!.cartItems!.isNotEmpty)
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) =>  OrderAddressScreen(),));
 
-                    decoration: BoxDecoration(
-                        color: mainColor,
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Total :  ", style: TextStyle(color:  Colors.white,fontSize: 20),),
-                        Text(
-                          "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(color:  Colors.white,fontSize: 20),),
-                      ],
-                    ))
+                  },
+                  child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: mainColor,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Buy Now", style: TextStyle(color:  Colors.white,fontSize: 20),),
+                        ],
+                      )),
+                ),
 
 
               ],

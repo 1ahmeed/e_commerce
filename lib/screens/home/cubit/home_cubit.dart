@@ -3,6 +3,7 @@
 
 import 'dart:convert';
 import 'package:e_commerce/core/constant.dart';
+import 'package:e_commerce/models/address/address_model.dart';
 import 'package:e_commerce/models/banners/banners_data.dart';
 import 'package:e_commerce/models/carts/cart_model.dart';
 import 'package:e_commerce/models/categories/category_data.dart';
@@ -107,9 +108,9 @@ class HomeCubit extends Cubit<HomeState> {
               item['id']:item['in_cart']
             });
           }
-          print("*************");
-          print(favouritesId);
-          print(productData);
+          // print("*************");
+          // print(favouritesId);
+          // print(productData);
           emit(ProductSuccessState());
         }else{
           ///emit failed
@@ -251,7 +252,7 @@ class HomeCubit extends Cubit<HomeState> {
         if(responseData['status']==true){
           //success
           changeCartData=ChangeCartData.fromJson(responseData['data']['product']);
-          print(responseData['data']['quantity']);
+          // print(responseData['data']['quantity']);
           await getCarts();
           emit(AddOrRemovingFromCartSuccessState(successMessage: responseData['message']));
         }else{
@@ -271,7 +272,6 @@ class HomeCubit extends Cubit<HomeState> {
   required int cartId,
   required int quantity
 })async{
-    print("update");
     emit(UpdateCartLoadingState());
 
     try {
@@ -291,18 +291,170 @@ class HomeCubit extends Cubit<HomeState> {
           getCarts();
           emit(UpdateCartSuccessState());
         }else{
-          print(responseData['message']);
+          // print(responseData['message']);
           ///emit error
           emit(UpdateCartFailedState(errorMessage: responseData['message']));
         }
       }
     } catch (e) {
 
-      print(e.toString());
+      // print(e.toString());
       emit(UpdateCartFailedState(errorMessage: e.toString()));
      ///emit error
     }
   }
+
+  ///address api
+   AddressModel? addressModel;
+  void getAddresses()async{
+    emit(GetAddressLoadingState());
+    try {
+      Response response=await http.get(
+          Uri.parse("https://student.valuxapps.com/api/addresses"),
+          headers: {
+            "lang":"en",
+            "Authorization":token!
+          }
+      );
+      var responseData= jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+          addressModel=AddressModel.fromJson(responseData);
+          // print("00000000000000000");
+          // print(addressModel!.data!.data![0].name);
+          emit(GetAddressSuccessState());
+        }else{
+          // print(responseData['message']);
+          ///emit failed
+          emit(GetAddressFailedState(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+      /// emit failed
+      emit(GetAddressFailedState(errorMessage: e.toString()));
+    }
+
+  }
+
+  void deleteAddresses({required int addressId})async{
+    emit(DeleteAddressLoadingState());
+    try {
+      Response response=await http.delete(
+          Uri.parse("https://student.valuxapps.com/api/addresses/$addressId"),
+          headers: {
+            "lang":"en",
+            "Authorization":token!
+          }
+      );
+      var responseData= jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+        getAddresses();
+          emit(DeleteAddressSuccessState(successMessage: responseData['message']));
+        }else{
+          ///emit failed
+          // print(responseData['message']);
+          emit(DeleteAddressFailedState(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+      /// emit failed
+      emit(DeleteAddressFailedState(errorMessage: e.toString()));
+    }
+  }
+
+
+  Future<void> updateAddress({
+  required String name,
+  required String city,
+  required String region,
+  required String details,
+  required int addressId,
+   double? lat,
+   double? long,
+   String? notes="",
+
+})async{
+    emit(UpdateAddressLoadingState());
+    try {
+      Response response=await http.put(Uri.parse("https://student.valuxapps.com/api/addresses/$addressId"),
+      body:{
+        "name":name,
+        "city":city,
+        "region":region,
+        "details":details,
+        "latitude":lat.toString(),
+        "longitude":long.toString(),
+        "notes":notes??"",
+      } ,
+       headers: {
+            "lang":"en",
+            "Authorization":token!
+          }
+      );
+      var responseData= jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+          getAddresses();
+          emit(UpdateAddressSuccessState(successMessage: responseData['message']));
+        }else{
+          ///emit failed
+          // print(responseData['message']);
+          emit(UpdateAddressFailedState(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+      emit(UpdateAddressFailedState(errorMessage: e.toString()));
+
+    }
+
+}
+
+  Future<void> addAddress({
+    required String name,
+    required String city,
+    required String region,
+    required String details,
+    double? lat,
+    double? long,
+    String? notes="",
+
+  })async{
+    emit(AddAddressLoadingState());
+    try {
+      Response response=await http.post(Uri.parse("https://student.valuxapps.com/api/addresses"),
+          body:{
+            "name":name,
+            "city":city,
+            "region":region,
+            "details":details,
+            "latitude":lat.toString(),
+            "longitude":long.toString(),
+            "notes":notes??"",
+          } ,
+          headers: {
+            "lang":"en",
+            "Authorization":token!
+          }
+      );
+      var responseData= jsonDecode(response.body);
+      if(response.statusCode==200){
+        if(responseData['status']==true){
+          getAddresses();
+          emit(AddAddressSuccessState(successMessage: responseData['message']));
+        }else{
+          ///emit failed
+          // print(responseData['message']);
+          emit(AddAddressFailedState(errorMessage: responseData['message']));
+        }
+      }
+    } catch (e) {
+      emit(AddAddressFailedState(errorMessage: e.toString()));
+    }
+
+  }
+
+
 
 
 ///todo:Search Api
