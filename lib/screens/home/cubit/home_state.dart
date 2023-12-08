@@ -122,3 +122,39 @@ class AddAddressFailedState extends HomeState {
 
   AddAddressFailedState({this.errorMessage});
 }
+
+class AddOrderLoadingState extends HomeState {}
+class AddOrderSuccessState extends HomeState {
+  final String successMessage;
+
+  AddOrderSuccessState({required this.successMessage});
+}
+class AddOrderFailedState extends HomeState {
+  final String? errorMessage;
+
+  AddOrderFailedState({this.errorMessage});
+}
+
+class GetOrderLoadingState extends HomeState {}
+class GetOrderSuccessState extends HomeState {}
+class GetOrderFailedState extends HomeState {
+  final String? errorMessage;
+
+  GetOrderFailedState({this.errorMessage});
+}
+
+class GetOrderDetailsLoadingState extends HomeState {}
+class GetOrderDetailsSuccessState extends HomeState {}
+class GetOrderDetailsFailedState extends HomeState {
+  final String? errorMessage;
+
+  GetOrderDetailsFailedState({this.errorMessage});
+}
+
+class CancelOrderLoadingState extends HomeState {}
+class CancelOrderSuccessState extends HomeState {}
+class CancelOrderFailedState extends HomeState {
+  final String? errorMessage;
+
+  CancelOrderFailedState({this.errorMessage});
+}

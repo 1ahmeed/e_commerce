@@ -172,7 +172,7 @@ class _BuildCartItemState extends State<BuildCartItem> {
                           HomeCubit.get(context)!.addOrRemoveFromFavourite(
                               productId:widget.cartItems!.product!.id!);
                         },
-                            child:HomeCubit.get(context)!.favouritesId[widget.cartItems!.product!.id] !=null ?
+                            child:HomeCubit.get(context)!.favouritesId[widget.cartItems!.product!.id] ==true ?
                             const Icon(Icons.favorite_outlined,color: Colors.red,):
                             const Icon(Icons.favorite_border_outlined,color: Colors.grey,)
                         ),

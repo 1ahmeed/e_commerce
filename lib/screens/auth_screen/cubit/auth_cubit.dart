@@ -33,9 +33,8 @@ class AuthCubit extends Cubit<AuthStates>{
           "password":password
         }
            );
-       if (response.statusCode==200)
-        {
-          var responseBody = jsonDecode(response.body);
+       var responseBody = jsonDecode(response.body);
+       if (response.statusCode==200) {
           if (responseBody["status"] == true) {
             //success
             // print(responseBody);

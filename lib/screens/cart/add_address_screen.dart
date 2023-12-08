@@ -9,7 +9,7 @@ import '../../core/component/custom_text_form_field.dart';
 import '../../core/utils/colors.dart';
 
 class AddAddressScreen extends StatelessWidget {
-  AddAddressScreen({Key? key, this.dataOfAddress}) : super(key: key);
+  AddAddressScreen({Key? key, this.dataOfAddress,}) : super(key: key);
   final DataOfAddress? dataOfAddress;
   final  nameController = TextEditingController();
   final cityController = TextEditingController();
@@ -26,9 +26,10 @@ class AddAddressScreen extends StatelessWidget {
       listener: (context, state) {
       },
       builder: (context, state) {
+
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Add"),
+            title: const Text("New Address"),
             elevation: 0,
             backgroundColor: Colors.transparent,
             foregroundColor: mainColor,
@@ -178,52 +179,7 @@ class AddAddressScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
-                            hintText: "your latitude on gps (optional) ",
-                            label: "latitude",
-                            controller: latController!,
-                            keyboard: TextInputType.number,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
-                            hintText: "your longitude on gps (optional) ",
-                            label: "longitude",
-                            controller: longController!,
-                            keyboard: TextInputType.number,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 30,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
+
                     Row(
                       children: [
                         const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:e_commerce/core/constant.dart';
 import 'package:e_commerce/screens/layout/cubit/layout_cubit.dart';
 import 'package:e_commerce/screens/layout/cubit/layout_state.dart';
+import 'package:e_commerce/screens/order/order_screen.dart';
 import 'package:e_commerce/screens/profile/cahnge_password_screen.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +83,23 @@ class LayoutScreen extends StatelessWidget {
                       ),
                       title:const  Text(
                         'Change password',
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    ///Order
+                    ListTile(
+                      onTap: () {
+                        Navigator.push(context,MaterialPageRoute(builder:
+                            (context) => OrderScreen(),) );
+                      },
+                      leading: const Icon(
+                        Icons.checklist_rtl_rounded,
+                      ),
+                      title:const  Text(
+                        'My Orders',
                         style:  TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

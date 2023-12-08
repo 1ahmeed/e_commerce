@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LayoutCubit(),),
         BlocProvider( create: (context) => ProfileCubit()..getUserData(),),
         BlocProvider(create: (context) =>HomeCubit()..getBanners()..getCategories()
-          ..getProducts()..getFavourites()..getCarts()..getAddresses(),),
+          ..getProducts()..getFavourites()..getCarts()..getAddresses()..getOrders(),),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
