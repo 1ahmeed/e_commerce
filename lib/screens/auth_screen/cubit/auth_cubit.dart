@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 
 class AuthCubit extends Cubit<AuthStates>{
@@ -24,7 +25,7 @@ class AuthCubit extends Cubit<AuthStates>{
        Response response = await http.post(
           Uri.parse("https://student.valuxapps.com/api/register"),
         headers: {
-            "lang":"en"
+          "lang": checkArabic()?"ar":"en"
         },
         body: {
             "name":name,
@@ -72,7 +73,7 @@ IconData suffix= Icons.visibility;
       Response response = await http.post(
           Uri.parse("https://student.valuxapps.com/api/login"),
           headers: {
-            "lang":"ar"
+            "lang": checkArabic()?"ar":"en"
           },
           body: {
             "email":email,
@@ -99,5 +100,23 @@ IconData suffix= Icons.visibility;
 
     }
 
+  }
+
+  bool checkArabic() {
+    return Intl.getCurrentLocale() == 'ar';
+  }
+  bool isArabic=false;
+  void changeLang({bool? fromShared}){
+    if(fromShared != null){
+      isArabic =fromShared;
+      emit(ChangeLangSuccessState());
+    }else {
+      isArabic =  !isArabic;
+    }
+    CacheNetwork.insertIntoCache(key: "isArabic", value: isArabic).
+    then((value) {
+      emit(ChangeLangSuccessState());
+
+    });
   }
 }

@@ -10,11 +10,14 @@ import 'package:e_commerce/models/favourites/favourite_model.dart';
 import 'package:e_commerce/models/order/OrderModel.dart';
 import 'package:e_commerce/models/order_details/OrderDetailsModel.dart';
 import 'package:e_commerce/models/product/products_data.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
+import '../../../core/local_data.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -57,7 +60,9 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.get(
           Uri.parse("https://student.valuxapps.com/api/categories"),
-          headers: {"lang": "en"});
+          headers: {
+            "lang": checkArabic()?"ar":"en"
+          });
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
         if (responseData['status'] == true) {
@@ -86,7 +91,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http
           .get(Uri.parse("https://student.valuxapps.com/api/home"), headers: {
-        "lang": "en",
+        "lang": checkArabic()?"ar":"en",
         "Authorization": token!,
       });
       var responseData = jsonDecode(response.body);
@@ -132,7 +137,7 @@ class HomeCubit extends Cubit<HomeState> {
       Response response = await http.get(
           Uri.parse("https://student.valuxapps.com/api/favorites"),
           headers: {
-            "lang": "en",
+            "lang": checkArabic()?"ar":"en",
             "Authorization": token!,
           });
       var responseData = jsonDecode(response.body);
@@ -165,7 +170,9 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.post(
           Uri.parse("https://student.valuxapps.com/api/favorites"),
-          headers: {"lang": "en", "Authorization": token!},
+          headers: {
+            "lang": checkArabic()?"ar":"en",
+            "Authorization": token!},
           body: {"product_id": productId.toString()});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -201,7 +208,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.get(
         Uri.parse("https://student.valuxapps.com/api/carts"),
-        headers: {"lang": "en", "Authorization": token!},
+        headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!},
       );
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -231,7 +238,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.post(
           Uri.parse("https://student.valuxapps.com/api/carts"),
-          headers: {"lang": "en", "Authorization": token!},
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!},
           body: {"product_id": productId.toString()});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -264,7 +271,7 @@ class HomeCubit extends Cubit<HomeState> {
       Response response = await http.put(
         Uri.parse("https://student.valuxapps.com/api/carts/$cartId"),
         body: {"quantity": quantity.toString()},
-        headers: {"lang": "en", "Authorization": token!},
+        headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!},
       );
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -294,7 +301,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.get(
           Uri.parse("https://student.valuxapps.com/api/addresses"),
-          headers: {"lang": "en", "Authorization": token!});
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
         if (responseData['status'] == true) {
@@ -319,7 +326,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.delete(
           Uri.parse("https://student.valuxapps.com/api/addresses/$addressId"),
-          headers: {"lang": "en", "Authorization": token!});
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
         if (responseData['status'] == true) {
@@ -362,7 +369,7 @@ class HomeCubit extends Cubit<HomeState> {
             "notes": notes ?? "",
           },
           headers: {
-            "lang": "en",
+            "lang": checkArabic()?"ar":"en",
             "Authorization": token!
           });
       var responseData = jsonDecode(response.body);
@@ -405,7 +412,7 @@ class HomeCubit extends Cubit<HomeState> {
             "notes": notes ?? "",
           },
           headers: {
-            "lang": "en",
+            "lang": checkArabic()?"ar":"en",
             "Authorization": token!
           });
       var responseData = jsonDecode(response.body);
@@ -437,7 +444,7 @@ class HomeCubit extends Cubit<HomeState> {
         "payment_method": payMethod.toString(),
         "use_points": userPoint.toString(),
       }, headers: {
-        "lang": "en",
+        "lang": checkArabic()?"ar":"en",
         "Authorization": token!
       });
       var responseData = jsonDecode(response.body);
@@ -468,7 +475,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.get(
           Uri.parse("https://student.valuxapps.com/api/orders"),
-          headers: {"lang": "en", "Authorization": token!});
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
         if (responseData['status'] == true) {
@@ -493,26 +500,26 @@ class HomeCubit extends Cubit<HomeState> {
     required orderId,
   }) async {
     emit(GetOrderDetailsLoadingState());
-    // try {
-    // } catch (e) {
-    //   print(e.toString());
-    //   emit(GetOrderDetailsFailedState(errorMessage: e.toString()));
-    // }
-    Response response = await http.get(
-        Uri.parse("https://student.valuxapps.com/api/orders/$orderId"),
-        headers: {"lang": "en", "Authorization": token!});
-    var responseData = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      if (responseData['status'] == true) {
-        orderDetailsModel = OrderDetailsModel.fromJson(responseData);
+    try {
+      Response response = await http.get(
+          Uri.parse("https://student.valuxapps.com/api/orders/$orderId"),
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!});
+      var responseData = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        if (responseData['status'] == true) {
+          orderDetailsModel = OrderDetailsModel.fromJson(responseData);
 
-        emit(GetOrderDetailsSuccessState());
-      } else {
-        ///emit failed
-        print(responseData['message']);
-        emit(GetOrderDetailsFailedState(
-            errorMessage: responseData['message']));
+          emit(GetOrderDetailsSuccessState());
+        } else {
+          ///emit failed
+          print(responseData['message']);
+          emit(GetOrderDetailsFailedState(
+              errorMessage: responseData['message']));
+        }
       }
+    } catch (e) {
+      debugPrint(e.toString());
+      emit(GetOrderDetailsFailedState(errorMessage: e.toString()));
     }
   }
 
@@ -521,7 +528,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       Response response = await http.get(
           Uri.parse("https://student.valuxapps.com/api/orders/$orderId/cancel"),
-          headers: {"lang": "en", "Authorization": token!});
+          headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!});
       var responseData = jsonDecode(response.body);
       if (response.statusCode == 200) {
         if (responseData['status'] == true) {
@@ -539,6 +546,8 @@ class HomeCubit extends Cubit<HomeState> {
       emit(CancelOrderFailedState(errorMessage: e.toString()));
     }
   }
+
+
 
   ///todo:Search Api
 //   List<SearchData> searchResult=[];

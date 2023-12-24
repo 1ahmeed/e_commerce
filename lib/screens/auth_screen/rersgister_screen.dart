@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/constant.dart';
 import '../../core/local_data.dart';
+import '../../generated/l10n.dart';
 
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ final passwordController=TextEditingController();
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Sign Up",
+                      Text(S.of(context).signUp,
                           style: Theme.of(context)
                               .textTheme
                               .headlineMedium
@@ -54,7 +55,7 @@ final passwordController=TextEditingController();
                             fontWeight: FontWeight.bold,
                           )),
                       Text(
-                        "Register now to browse our hot offers",
+                        S.of(context).registerNowToBrowseOurHotOffers,
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge
@@ -68,11 +69,11 @@ final passwordController=TextEditingController();
                           keyboard: TextInputType.name,
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return "please enter your name";
+                              return S.of(context).pleaseEnterYourName;
                             }
                             return null;
                           },
-                          label: "Name",
+                          label: S.of(context).name,
                           prefixIcon: Icons.person),
                       const SizedBox(
                         height: 20,
@@ -82,11 +83,11 @@ final passwordController=TextEditingController();
                           keyboard: TextInputType.emailAddress,
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return "please enter your email";
+                              return S.of(context).pleaseEnterYourEmail;
                             }
                             return null;
                           },
-                          label: "Email",
+                          label: S.of(context).email,
                           prefixIcon: Icons.email),
                       const SizedBox(
                         height: 20,
@@ -96,11 +97,11 @@ final passwordController=TextEditingController();
                           keyboard: TextInputType.phone,
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return "please enter your phone";
+                              return S.of(context).pleaseEnterYourPhone;
                             }
                             return null;
                           },
-                          label: "Phone",
+                          label: S.of(context).phone,
                           prefixIcon: Icons.phone),
                       const SizedBox(
                         height: 20,
@@ -118,13 +119,13 @@ final passwordController=TextEditingController();
                           maxLines: 1,
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return "please enter your password";
+                              return S.of(context).pleaseEnterYourPassword;
                             }else if(int.parse(value) <= 6){
-                              return "password is too short";
+                              return S.of(context).passwordIsTooShort;
                             }
                             return null;
                           },
-                          label: "Password",
+                          label: S.of(context).password,
                           prefixIcon: Icons.lock),
                       const SizedBox(
                         height: 50,
@@ -148,8 +149,9 @@ final passwordController=TextEditingController();
                         minWidth: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         child:  Text(
+                          ///todo
                           state is RegisterLoadingState?
-                          "loading....":"Register",style:
+                          "loading....":S.of(context).register,style:
                         const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
 
                       ),
@@ -159,14 +161,14 @@ final passwordController=TextEditingController();
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:
                         [
-                          const Text('Already have an account? ',style: TextStyle(color: Colors.black)),
+                           Text(S.of(context).haveAccount,style: const TextStyle(color: Colors.black)),
                           const SizedBox(width: 4,),
                           InkWell(
                             onTap: ()
                             {
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginScreen()));
                             },
-                            child: const Text('login in',style: TextStyle(color: mainColor,fontWeight: FontWeight.bold)),
+                            child:  Text(S.of(context).login,style: const TextStyle(color: mainColor,fontWeight: FontWeight.bold)),
                           )
                         ],
                       )

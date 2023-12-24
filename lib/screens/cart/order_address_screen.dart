@@ -6,6 +6,8 @@ import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
+
 
 class OrderAddressScreen extends StatelessWidget {
   OrderAddressScreen({Key? key}) : super(key: key);
@@ -48,14 +50,15 @@ class OrderAddressScreen extends StatelessWidget {
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
-                title: const Text("Choose Your Address"),
+                title:  Text(S.of(context).chooseYourAddress),
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 foregroundColor: mainColor,
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => AddAddressScreen(),));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => AddAddressScreen(),));
 
                 },
                 backgroundColor: mainColor,

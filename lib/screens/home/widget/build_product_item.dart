@@ -7,6 +7,8 @@ import 'package:e_commerce/screens/home/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
+
 
 class BuildProductItems extends StatelessWidget {
   const BuildProductItems({
@@ -66,9 +68,9 @@ class BuildProductItems extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 color: Colors.red,
-                                child: const Text(
-                                  "DISCOUNT",
-                                  style: TextStyle(
+                                child:  Text(
+                                  S.of(context).discount,
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 14),
                                 ),
                               )

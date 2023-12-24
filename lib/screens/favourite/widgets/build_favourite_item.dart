@@ -5,6 +5,7 @@ import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
 import '../../home/cubit/home_cubit.dart';
 
 class BuildFavouriteItem extends StatelessWidget {
@@ -48,9 +49,9 @@ class BuildFavouriteItem extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       color: Colors.red,
-                      child: const Text(
-                        "DISCOUNT",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      child:  Text(
+                        S.of(context).discount,
+                        style: const TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     )
                 ],
@@ -113,7 +114,7 @@ class BuildFavouriteItem extends StatelessWidget {
                             productId: model!.product!.id);
                         // cubit.addOrRemoveFromFavorites(productID: model.id.toString());
                       },
-                      child: const Text("Remove"),
+                      child:  Text(S.of(context).remove),
                     )
                   ],
                 ),

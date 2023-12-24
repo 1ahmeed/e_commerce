@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/utils/colors.dart';
+import '../../generated/l10n.dart';
 
 class AddAddressScreen extends StatelessWidget {
   AddAddressScreen({Key? key, this.dataOfAddress,}) : super(key: key);
@@ -29,7 +30,7 @@ class AddAddressScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text("New Address"),
+            title: Text(S.of(context).newAddress),
             elevation: 0,
             backgroundColor: Colors.transparent,
             foregroundColor: mainColor,
@@ -55,9 +56,9 @@ class AddAddressScreen extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        const Text(
-                          "Add Your New Address",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                         Text(
+                          S.of(context).addYourNewAddress,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -73,14 +74,14 @@ class AddAddressScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            hintText: "your name",
+                            hintText: S.of(context).yourName,
                             border: const OutlineInputBorder(),
                             enabledBorder: const OutlineInputBorder(),
-                            label: "Name",
+                            label: S.of(context).name,
                             controller: nameController,
                             validate: (value) {
                               if (value!.trim().isEmpty) {
-                                return " name is required";
+                                return S.of(context).nameIsRequired;
                               }
                               return null;
                             },
@@ -103,12 +104,12 @@ class AddAddressScreen extends StatelessWidget {
                           child: CustomTextFormField(
                             enabledBorder: const OutlineInputBorder(),
                             border: const OutlineInputBorder(),
-                            hintText: "name of your city",
-                            label: "City",
+                            hintText: S.of(context).nameOfYourCity,
+                            label: S.of(context).city,
                             controller: cityController,
                             validate: (value) {
                               if (value!.trim().isEmpty) {
-                                return " this field must not be empty";
+                                return S.of(context).thisFieldMustNotBeEmpty;
                               }
                               return null;
                             },
@@ -132,12 +133,12 @@ class AddAddressScreen extends StatelessWidget {
                           child: CustomTextFormField(
                             enabledBorder: const OutlineInputBorder(),
                             border: const OutlineInputBorder(),
-                            hintText: "name of your region",
-                            label: "Region",
+                            hintText: S.of(context).nameOfYourRegion,
+                            label: S.of(context).region,
                             controller: regionController,
                             validate: (value) {
                               if (value!.trim().isEmpty) {
-                                return "this field must not be empty";
+                                return S.of(context).thisFieldMustNotBeEmpty;
                               }
                               return null;
                             },
@@ -160,12 +161,12 @@ class AddAddressScreen extends StatelessWidget {
                           child: CustomTextFormField(
                             enabledBorder: const OutlineInputBorder(),
                             border: const OutlineInputBorder(),
-                            hintText: "details of your region",
-                            label: "Details",
+                            hintText:S.of(context).detailsOfYourRegion,
+                            label: S.of(context).details,
                             controller: detailsController,
                             validate: (value) {
                               if (value!.trim().isEmpty) {
-                                return " this field must not be empty";
+                                return S.of(context).thisFieldMustNotBeEmpty;
                               }
                               return null;
                             },
@@ -189,8 +190,8 @@ class AddAddressScreen extends StatelessWidget {
                           child: CustomTextFormField(
                             enabledBorder: const OutlineInputBorder(),
                             border: const OutlineInputBorder(),
-                            hintText: "your notes (optional)",
-                            label: "Note",
+                            hintText: S.of(context).yourNotes,
+                            label: S.of(context).note,
                             maxLines: 5,
                             controller: notesController,
                             keyboard: TextInputType.number,
@@ -233,9 +234,9 @@ class AddAddressScreen extends StatelessWidget {
                                   backgroundColor: Colors.green,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(9))),
-                              child: const Text(
-                                'Add',
-                                style: TextStyle(color: Colors.white,fontSize: 20),
+                              child:  Text(
+                                S.of(context).add,
+                                style: const TextStyle(color: Colors.white,fontSize: 20),
                               ),
                             ),
                           ),

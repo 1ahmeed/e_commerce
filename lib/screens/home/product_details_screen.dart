@@ -6,6 +6,7 @@ import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../generated/l10n.dart';
 import '../../models/product/products_data.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
             foregroundColor: mainColor,
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: const Text("Details"),
+            title:  Text(S.of(context).details),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -56,9 +57,9 @@ class ProductDetailsScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 5),
                                 color: Colors.red,
-                                child: const Text(
-                                  "DISCOUNT",
-                                  style: TextStyle(
+                                child:  Text(
+                                  S.of(context).discount,
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 14),
                                 ),
                               )
@@ -111,45 +112,6 @@ class ProductDetailsScreen extends StatelessWidget {
                             overflow: TextOverflow.ellipsis),
                       ),
 
-                      // Expanded(
-                      //   child: Container(
-                      //     width: double.infinity,
-                      //     height: double.infinity,
-                      //     decoration: const BoxDecoration(
-                      //         color: mainColor,
-                      //       borderRadius: BorderRadius.only(
-                      //           topLeft:Radius.circular(25) ,topRight:Radius.circular(25) )
-                      //     ),
-                      //     child: Padding(
-                      //       padding:  const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
-                      //       child: SingleChildScrollView(
-                      //         child: Column(
-                      //           children: [
-                      //             Text(
-                      //               productsData!.name!,
-                      //               maxLines: 3,
-                      //               style: const TextStyle(
-                      //                 color: Colors.white,
-                      //                    fontWeight: FontWeight.bold,
-                      //                   fontSize: 20,
-                      //                   overflow: TextOverflow.ellipsis),
-                      //             ),
-                      //             const SizedBox(height: 15,),
-                      //
-                      //             Text(
-                      //               productsData!.description!,
-                      //               maxLines: 50,
-                      //               style: const TextStyle(
-                      //                 color: Colors.white,
-                      //                   fontSize: 18,
-                      //                   overflow: TextOverflow.ellipsis),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // )
                     ],
                   ),
                 ),
@@ -177,7 +139,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                 // HomeCubit.get(context)!.addOrRemoveFromCart(productId:productsData!.id!);
 
                               },
-                              child:const Text("Go To Cart",style: TextStyle(color: Colors.white),)),
+                              child: Text(S.of(context).goToCart,style: const TextStyle(color: Colors.white),)),
                         ),
                       ),
                     if(HomeCubit.get(context)!.cartsId[productsData!.id] ==false)
@@ -191,7 +153,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             HomeCubit.get(context)!.addOrRemoveFromCart(productId:productsData!.id!);
 
                             },
-                            child:const Text("Add To Cart",style: TextStyle(color: Colors.white),)),
+                            child: Text(S.of(context).addToCart,style: const TextStyle(color: Colors.white),)),
                       ),
                     )
 

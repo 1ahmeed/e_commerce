@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/utils/colors.dart';
+import '../../generated/l10n.dart';
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class OrderScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Your Order"),
+              title:  Text(S.of(context).yourOrder),
               elevation: 0,
               backgroundColor: Colors.transparent,
               foregroundColor: mainColor,

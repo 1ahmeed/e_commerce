@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/component/custom_navigation_and_finish.dart';
+import 'package:e_commerce/core/constant.dart';
 import 'package:e_commerce/models/address/address_model.dart';
 import 'package:e_commerce/screens/cart/edit_address_screen.dart';
 import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../core/utils/dialog_utils.dart';
+import '../../../generated/l10n.dart';
 
 class BuildAddressItem  extends StatelessWidget {
    BuildAddressItem({Key? key,this.index,this.dataOfAddress}) : super(key: key);
@@ -38,9 +40,7 @@ class BuildAddressItem  extends StatelessWidget {
               children: [
                 Row(
                     children: [
-                      Text('Note: \n address you chose will receive\n'
-                          'your order,So be sure to choose \n '
-                          'the address accurately ',
+                      Text(S.of(context).warningInChooseAddress,
                         style: TextStyle(
                           color: Colors.red[900],
                           fontWeight: FontWeight.bold,
@@ -52,13 +52,13 @@ class BuildAddressItem  extends StatelessWidget {
                 const SizedBox(
                     height: 30.0,
                 ),
-                const Row(
+                 Row(
                     children: [
-                      Text('Do you want to pay online or  in\ncash?',
-                        style: TextStyle(
+                      Text(S.of(context).howToPay,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
+                          fontSize: 14.0,
                         ),
                       ),
                     ],
@@ -68,7 +68,7 @@ class BuildAddressItem  extends StatelessWidget {
             ),
                  ),
 
-                posActionTitle: "cash",
+                posActionTitle: S.of(context).cash,
                 posAction: ()async{
                   DialogUtils.showLoading(context, "Loading...");
                   await  HomeCubit.get(context)!.makeOrder(
@@ -76,7 +76,7 @@ class BuildAddressItem  extends StatelessWidget {
                   payMethod: 1);
                   DialogUtils.hideLoading(context);
               DialogUtils.showMessage(context,
-                  "The order has been successfully added to the order list. You will \n receive the order within two days ",
+                 S.of(context).successOrderCache,
                   posActionTitle: "ok",
                   posAction: ()async{
                     // await HomeCubit.get(context)!.getOrders();
@@ -88,7 +88,7 @@ class BuildAddressItem  extends StatelessWidget {
 
 
                 },
-              negActionTitle: "online",
+              negActionTitle: S.of(context).online,
               negAction:()async{
                 DialogUtils.showLoading(context, "Loading...");
                 await HomeCubit.get(context)!.makeOrder(
@@ -96,7 +96,7 @@ class BuildAddressItem  extends StatelessWidget {
                     payMethod: 2);
                 DialogUtils.hideLoading(context);
                 DialogUtils.showMessage(context,
-                    "The order was placed successfully",
+                    S.of(context).successOrderOnline,
                     posActionTitle: "ok",
                     posAction: (){
                       HomeCubit.get(context)!.getCarts();
@@ -124,7 +124,7 @@ class BuildAddressItem  extends StatelessWidget {
                   ///اسم العميل
                   Row(
                     children: [
-                      const Text('Client Name :',
+                       Text(S.of(context).clientName,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -152,8 +152,8 @@ class BuildAddressItem  extends StatelessWidget {
                   ///المدينه
                   Row(
                     children: [
-                      const Text(
-                        'City Name :  ' ,
+                       Text(
+                       S.of(context).cityName,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -178,8 +178,8 @@ class BuildAddressItem  extends StatelessWidget {
                   ///المنطقه
                    Row(
                     children: [
-                      const Text(
-                        'Region :  ' ,
+                       Text(
+                        "${S.of(context).region} :  ",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -204,8 +204,8 @@ class BuildAddressItem  extends StatelessWidget {
                   ///التفاصيل
                   Row(
                     children: [
-                      const Text(
-                        'Details :  ' ,
+                       Text(
+                        '${S.of(context).details} :  ' ,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -230,8 +230,8 @@ class BuildAddressItem  extends StatelessWidget {
                   ///اي ملاحظات
                   Row(
                     children: [
-                      const Text(
-                        'Notes :  ' ,
+                       Text(
+                        '${S.of(context).note} :  ' ,
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -258,9 +258,10 @@ class BuildAddressItem  extends StatelessWidget {
             ),
           ),
         ),
+
         Positioned(
-            left: 320,
-            top: 5,
+            left:checkArabic()? 10:320,
+            top: checkArabic()?8:5,
             child: InkWell(
                 onTap: (){
                   HomeCubit.get(context)!.deleteAddresses(
@@ -269,7 +270,7 @@ class BuildAddressItem  extends StatelessWidget {
                 },
                 child: const Icon(Icons.delete,size:25,color: Colors.red,))),
         Positioned(
-            left: 280,
+            left: checkArabic()?50:280,
             top: 5,
             child: InkWell(
                 onTap: (){

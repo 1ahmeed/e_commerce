@@ -6,6 +6,8 @@ import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../generated/l10n.dart';
+
 class BuildCartItem extends StatefulWidget {
     const BuildCartItem({Key? key, required this.cartItems,})
       : super(key: key);
@@ -53,9 +55,9 @@ class _BuildCartItemState extends State<BuildCartItem> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       color: Colors.red,
-                      child: const Text(
-                        "DISCOUNT",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      child:  Text(
+                        S.of(context).discount,
+                        style: const TextStyle(color: Colors.white, fontSize: 14),
                       ),
                     )
                 ],
@@ -187,7 +189,7 @@ class _BuildCartItemState extends State<BuildCartItem> {
                             // Add | remove product favorites
                             HomeCubit.get(context)!.addOrRemoveFromCart(productId:widget.cartItems!.product!.id!);
                           },
-                          child: const Text("Remove"),
+                          child:  Text(S.of(context).remove),
                         )
                       ],
                     ),

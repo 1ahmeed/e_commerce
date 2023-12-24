@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../../../core/utils/dialog_utils.dart';
+import '../../../generated/l10n.dart';
 
 class BuildOrderItem extends StatelessWidget {
   BuildOrderItem({Key? key, this.index, this.dataOfOrder}) : super(key: key);
@@ -46,8 +47,8 @@ class BuildOrderItem extends StatelessWidget {
               ///total
               Row(
                 children: [
-                  const Text('total: ',
-                    style: TextStyle(
+                   Text('${S.of(context).total} ',
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 17.0,
@@ -75,9 +76,9 @@ class BuildOrderItem extends StatelessWidget {
               ///date
               Row(
                 children: [
-                  const Text(
-                    'Date :  ',
-                    style: TextStyle(
+                   Text(
+                    '${S.of(context).date} :  ',
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 17.0,
@@ -102,9 +103,9 @@ class BuildOrderItem extends StatelessWidget {
               ///status
               Row(
                 children: [
-                  const Text(
-                    'Status :  ',
-                    style: TextStyle(
+                   Text(
+                    '${S.of(context).status} :  ',
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 17.0,

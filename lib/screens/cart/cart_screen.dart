@@ -6,7 +6,7 @@ import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/utils/dialog_utils.dart';
+import '../../generated/l10n.dart';
 import 'order_address_screen.dart';
 
 class CartScreen extends StatelessWidget {
@@ -16,34 +16,6 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        // if(state is AddOrRemovingFromFavouritesSuccessState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.green,
-        //       duration: const Duration(seconds: 3),
-        //
-        //       content: Text(state.successMessage)));
-        // }
-        // else if(state is AddOrRemovingFromFavouritesFailedState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.red,
-        //       duration: const Duration(seconds: 3),
-        //       content: Text(state.errorMessage)));
-        // }
-        // if(state is AddOrRemovingFromCartSuccessState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.green,
-        //       duration: const Duration(seconds: 3),
-        //
-        //       content: Text(state.successMessage)));
-        //
-        // }
-        // else if(state is AddOrRemovingFromCartFailedState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.red,
-        //       duration: const Duration(seconds: 3),
-        //       content: Text(state.errorMessage)));
-        //
-        // }
       },
       builder: (context, state) {
         return Scaffold(
@@ -72,7 +44,7 @@ class CartScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Total :  ", style: TextStyle(color:  Colors.black,fontSize: 20),),
+                     Text(S.of(context).total, style: const TextStyle(color:  Colors.black,fontSize: 20),),
                     Text(
                       "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(color:  Colors.black,fontSize: 20),),
                   ],
@@ -92,10 +64,10 @@ class CartScreen extends StatelessWidget {
                           color: mainColor,
                         borderRadius: BorderRadius.circular(10)
                       ),
-                      child: const Row(
+                      child:  Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Buy Now", style: TextStyle(color:  Colors.white,fontSize: 20),),
+                          Text(S.of(context).buyNow, style: const TextStyle(color:  Colors.white,fontSize: 20),),
                         ],
                       )),
                 ),

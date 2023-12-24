@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
+import '../../generated/l10n.dart';
 import 'cubit/profile_cubit.dart';
 import 'cubit/profile_states.dart';
 
@@ -39,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Profile"),
+            title:  Text(S.of(context).update),
             elevation: 0,
             foregroundColor: mainColor,
             backgroundColor: Colors.transparent,
@@ -65,11 +66,11 @@ class ProfileScreen extends StatelessWidget {
                       keyboard: TextInputType.name,
                       validate: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Name Must Not Be Empty ';
+                          return S.of(context).nameMustNotBeEmpty;
                         }
                         return null;
                       },
-                      label: 'Name',
+                      label: S.of(context).name,
                       prefixIcon: Icons.person,
                     ),
                     const SizedBox(
@@ -82,11 +83,11 @@ class ProfileScreen extends StatelessWidget {
                       keyboard: TextInputType.emailAddress,
                       validate: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Email Must Not Be Empty ';
+                          return S.of(context).emailMustNotBeEmpty;
                         }
                         return null;
                       },
-                      label: 'EmailAddress',
+                      label: S.of(context).emailAddress,
                       prefixIcon: Icons.email,
                     ),
                     const SizedBox(
@@ -98,11 +99,11 @@ class ProfileScreen extends StatelessWidget {
                       keyboard: TextInputType.phone,
                       validate: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Phone Must Not Be Empty ';
+                          return S.of(context).phoneMustNotBeEmpty;
                         }
                         return null;
                       },
-                      label: 'Phone Number',
+                      label: S.of(context).phone,
                       prefixIcon: Icons.phone,
                     ),
                     const SizedBox(
@@ -119,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
                             );
                           }
                         },
-                        text:state is UpdateUserDataLoadingStates? 'Loading Update....':'Update'
+                        text:state is UpdateUserDataLoadingStates? 'Loading Update....':S.of(context).update
                     ),
 
 

@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dialog_utils.dart';
+import '../../../generated/l10n.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   const OrderDetailsScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class OrderDetailsScreen extends StatelessWidget {
         var model=HomeCubit.get(context)!.orderDetailsModel;
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Order Details"),
+              title:  Text(S.of(context).orderDetails),
               elevation: 0,
               backgroundColor: Colors.transparent,
               foregroundColor: mainColor,
@@ -47,7 +48,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                  Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Expanded(child: Center(child: SvgPicture.asset("images/logo.svg"))),
+                                    Directionality(
+                                        textDirection: TextDirection.ltr,
+                                        child: Expanded(child: Center(child: SvgPicture.asset("images/logo.svg")))),
 
                                   ],
                                 ),
@@ -62,9 +65,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                     children: [
                                       Row(
                                         children: <Widget>[
-                                          const Text(
-                                            "name:",
-                                            style: TextStyle(
+                                           Text(
+                                            "${S.of(context).name}:",
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const Spacer(),
@@ -84,17 +87,19 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "address:",
-                                            style: TextStyle(
+                                           Text(
+                                            "${S.of(context).address}:",
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const Spacer(),
-                                          Text(
-                                            "${model.data!.address!.city}-${model.data!.address!.region}-${model.data!.address!.details}",
-                                            maxLines: 2,
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
+                                          Expanded(
+                                            child: Text(
+                                              "${model.data!.address!.city}-${model.data!.address!.region}-${model.data!.address!.details}",
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -105,9 +110,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "date:",
-                                            style: TextStyle(
+                                           Text(
+                                            "${S.of(context).date}:",
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const Spacer(),
@@ -125,9 +130,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "payment-method:",
-                                            style: TextStyle(
+                                           Text(
+                                            S.of(context).paymentMethod,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const Spacer(),
@@ -145,9 +150,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "Status",
-                                            style: TextStyle(
+                                           Text(
+                                            S.of(context).status,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const Spacer(),
@@ -165,33 +170,33 @@ class OrderDetailsScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                                 Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                                   child: Column(
                                     children: [
                                       Row(
                                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
                                           Text(
-                                            "Product Name",
-                                            style: TextStyle(
+                                            S.of(context).productName,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           Text(
-                                            "quantity",
-                                            style: TextStyle(
+                                            S.of(context).quantity,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           Text(
-                                            "cost/one",
-                                            style: TextStyle(
+                                            S.of(context).costPerOne,
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
-                                      Divider(
+                                      const Divider(
                                         thickness: 2,
                                       ),
                                     ],
@@ -256,9 +261,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "Cost :",
-                                            style: TextStyle(
+                                           Text(
+                                            S.of(context).cost,
+                                            style: const TextStyle(
                                               fontSize: 17.0,
                                             ),
                                           ),
@@ -274,9 +279,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "discount :",
-                                            style: TextStyle(
+                                           Text(
+                                            "${S.of(context).discount} :",
+                                            style: const TextStyle(
                                               fontSize: 17.0,
                                             ),
                                           ),
@@ -293,9 +298,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "points :",
-                                            style: TextStyle(
+                                           Text(
+                                            S.of(context).points,
+                                            style: const TextStyle(
                                               fontSize: 17.0,
                                             ),
                                           ),
@@ -312,15 +317,16 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "vat :",
-                                            style: TextStyle(
-                                              fontSize: 17.0,
-                                            ),
+                                           Expanded(
+                                             child: Text(
+                                              S.of(context).vat,
+                                              style: const TextStyle(
+                                                fontSize: 15.0,
+                                              ),
                                           ),
+                                           ),
                                           const Spacer(),
                                           Text(
-                                            // '{widget.billsModel.orderTotalPrice}'
                                             model.data!.vat.toString(),
                                             style: const TextStyle(
                                                 fontSize: 17.0),
@@ -331,9 +337,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          const Text(
-                                            "Total",
-                                            style: TextStyle(
+                                           Text(
+                                            S.of(context).total,
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20.0,
                                             ),
@@ -365,9 +371,9 @@ class OrderDetailsScreen extends StatelessWidget {
                                   onPressed: () {
                                     navigatorAndFinish(context, LayoutScreen());
                                   },
-                                  label: const Text(
-                                    'go to home',
-                                    style: TextStyle(
+                                  label:  Text(
+                                    S.of(context).goToHome,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold),
@@ -384,7 +390,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                 TextButton(onPressed: (){
                                   if(model.data!.status=="Cancelled" ){
                                     DialogUtils.showMessage(context,
-                                        "This order is already cancelled",
+                                        S.of(context).thisOrderIsAlreadyCancelled,
                                         posActionTitle: "ok",
                                         posAction: (){
                                           Navigator.pop(context);
@@ -395,7 +401,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                       SizedBox(
                                         child: Row(
                                           children: [
-                                            Text('Do You want cancel this order?',
+                                            Text(S.of(context).doYouWantCancelThisOrder,
                                               style: TextStyle(
                                                 color: Colors.red[900],
                                                 fontWeight: FontWeight.bold,
@@ -413,7 +419,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                           orderId: model.data!.id!,);
                                         DialogUtils.hideLoading(context);
                                         DialogUtils.showMessage(context,
-                                            "The order has been successfully canceled ",
+                                            S.of(context).theOrderHasBeenSuccessfullyCanceled,
                                             posActionTitle: "ok",
                                             posAction: (){
                                               Navigator.pop(context);
@@ -428,7 +434,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                     );
                                   }
 
-                                }, child: const Text("Cancel Order",style: TextStyle(color: Colors.red),))
+                                }, child:  Text(S.of(context).cancelOrder,style: const TextStyle(color: Colors.red),))
                               ],
                             ),
                           ),

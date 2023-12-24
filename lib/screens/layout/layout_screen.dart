@@ -11,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:iconly/iconly.dart';
 
+import '../../generated/l10n.dart';
 import '../contact_us/contact_us_screen.dart';
 import '../profile/profile_screen.dart';
 
@@ -48,10 +49,12 @@ class LayoutScreen extends StatelessWidget {
                   children: [
                     const Spacer(),
 
-                     SvgPicture.asset(
-                       "images/logo.svg",height: 100,
-                       width: 70,color: Colors.white,),
-
+                     Directionality(
+                       textDirection: TextDirection.ltr,
+                       child: SvgPicture.asset(
+                         "images/logo.svg",height: 100,
+                         width: 70,color: Colors.white,),
+                     ),
                     const Spacer(),
 
                     ListTile(
@@ -63,15 +66,31 @@ class LayoutScreen extends StatelessWidget {
                       leading: const Icon(
                         Icons.person,
                       ),
-                      title: const Text(
-                        'Profile',
-                        style:  TextStyle(
+                      title:  Text(
+                        S.of(context).profile,
+                        style:  const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
 
-                    ///change password
+                    ListTile(
+                      onTap: () {
+                        ///localization
+                        LayoutCubit.get(context)!.changeLang();
+
+                      },
+                      leading: const Icon(
+                        Icons.language,
+                      ),
+                      title:  Text(
+                       S.of(context).language,
+                        style:  const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
                     ListTile(
                       onTap: () {
                         ///change password
@@ -81,9 +100,9 @@ class LayoutScreen extends StatelessWidget {
                       leading: const Icon(
                         Icons.lock,
                       ),
-                      title:const  Text(
-                        'Change password',
-                        style:  TextStyle(
+                      title:  Text(
+                        S.of(context).changePassword,
+                        style:  const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -98,9 +117,9 @@ class LayoutScreen extends StatelessWidget {
                       leading: const Icon(
                         Icons.checklist_rtl_rounded,
                       ),
-                      title:const  Text(
-                        'My Orders',
-                        style:  TextStyle(
+                      title:  Text(
+                        S.of(context).myOrders,
+                        style:  const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -117,9 +136,9 @@ class LayoutScreen extends StatelessWidget {
                       leading: const Icon(
                         IconlyBold.user_3,
                       ),
-                      title: const Text(
-                        'Help',
-                        style: TextStyle(
+                      title:  Text(
+                        S.of(context).help,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -133,8 +152,8 @@ class LayoutScreen extends StatelessWidget {
                       leading: const Icon(
                         Icons.logout,
                       ),
-                      title: const Text(
-                        ' Log Out ',
+                      title:  Text(
+                        S.of(context).logOut,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -147,8 +166,11 @@ class LayoutScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
-              title: SvgPicture.asset("images/logo.svg",
-                height: 40,width: 40,color: mainColor,),
+              title: Directionality(
+                textDirection: TextDirection.ltr,
+                child: SvgPicture.asset("images/logo.svg",
+                  height: 40,width: 40,color: mainColor,),
+              ),
               leading: IconButton(
                 onPressed:(){
                   _advancedDrawerController.showDrawer();
@@ -175,7 +197,6 @@ class LayoutScreen extends StatelessWidget {
 
               selectedItemColor: mainColor,
               unselectedItemColor: Colors.grey,
-              // backgroundColor:mainColor,
               type: BottomNavigationBarType.fixed,
               currentIndex: cubit!.currentIndex,
               onTap: (index) {
@@ -186,25 +207,25 @@ class LayoutScreen extends StatelessWidget {
                   icon: Icon(
                     Icons.home,
                   ),
-                  label: 'home',
+                  label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.category,
                   ),
-                  label: 'Category',
+                  label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.favorite,
                   ),
-                  label: 'Favourites',
+                  label: '',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.shopping_cart,
                   ),
-                  label: 'Cart',
+                  label: '',
                 ),
               ],
             ),

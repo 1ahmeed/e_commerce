@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/utils/colors.dart';
+import '../../generated/l10n.dart';
 import 'cubit/profile_cubit.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title:const  Text("Change Password"),
+            title:Text(S.of(context).changePassword),
             backgroundColor: Colors.transparent,
             elevation: 0,
             foregroundColor: mainColor,
@@ -55,11 +56,11 @@ class ChangePasswordScreen extends StatelessWidget {
                     isPassword: ProfileCubit.get(context)!.isPassword,
                     validate: (String? value) {
                       if (value!.isEmpty) {
-                        return 'old password Must Not Be Empty ';
+                        return S.of(context).oldPasswordMustNotBeEmpty;
                       }
                       return null;
                     },
-                    label: 'old password',
+                    label: S.of(context).oldPassword,
                     maxLines: 1,
                   ),
                   const SizedBox(
@@ -76,11 +77,11 @@ class ChangePasswordScreen extends StatelessWidget {
                     isPassword: ProfileCubit.get(context)!.isPassword2,
                     validate: (String? value) {
                       if (value!.isEmpty) {
-                        return 'new password Must Not Be Empty ';
+                        return S.of(context).newPasswordMustNotBeEmpty;
                       }
                       return null;
                     },
-                    label: 'new password',
+                    label: S.of(context).newPassword,
                     maxLines: 1,
                   ),
                   const SizedBox(
@@ -99,22 +100,22 @@ class ChangePasswordScreen extends StatelessWidget {
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                   SnackBar(
                                       backgroundColor: Colors.red,
                                       content: Text(
-                                          "password must be at least 6 character")));
+                                          S.of(context).passwordMustBeAtLeast6Character)));
                             }
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                                 backgroundColor: Colors.red,
                                 content: Text(
-                                    "please, verify old password and try again")));
+                                    S.of(context).verifyOldPasswordAndTryAgain)));
                           }
                         }
                       },
                       text: state is ChangePasswordLoadingStates
                           ? 'Loading Changes....'
-                          : 'Change'),
+                          : S.of(context).change),
                 ],
               ),
             ),

@@ -32,3 +32,6 @@ class LoginFailedState extends AuthStates {
 
 }
 
+class ChangeLangSuccessState extends AuthStates {}
+
+

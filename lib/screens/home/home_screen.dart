@@ -2,6 +2,7 @@ import 'package:e_commerce/screens/home/widget/build_product_item.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../generated/l10n.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_state.dart';
 
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
-                  hintText: "Search",
+                  hintText: S.of(context).search,
                   suffixIcon: IconButton(
                       icon: const Icon(Icons.clear),
                       onPressed: () {
@@ -122,21 +123,21 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 15,
             ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
+             Padding(
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Categories",
-                    style: TextStyle(
+                    S.of(context).categories,
+                    style: const TextStyle(
                         color: mainColor,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "View all",
-                    style: TextStyle(
+                    S.of(context).viewAll,
+                    style: const TextStyle(
                         color: secondColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
@@ -173,21 +174,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
+             Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Products",
-                    style: TextStyle(
+                    S.of(context).products,
+                    style: const TextStyle(
                         color: mainColor,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "View all",
-                    style: TextStyle(
+                    S.of(context).viewAll,
+                    style: const TextStyle(
                         color: secondColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
@@ -215,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeCubit.get(context)!.productData[index])),
             if (HomeCubit.get(context)!.productAfterFiltered.isEmpty &&
                 searchController.text != "")
-              const Center(child: Text("No Result")),
+               Center(child: Text(S.of(context).noResult)),
             if (HomeCubit.get(context)!.productAfterFiltered.isNotEmpty)
               GridView.builder(
                   itemCount: HomeCubit.get(context)!.productAfterFiltered.length,

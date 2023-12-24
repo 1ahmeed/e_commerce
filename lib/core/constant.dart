@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'component/custom_navigation_and_finish.dart';
 import 'local_data.dart';
 import '../screens/auth_screen/login_screen.dart';
@@ -12,4 +14,8 @@ void signOut(context) {
       navigatorAndFinish(context, LoginScreen());
     }
   });
+}
+
+bool checkArabic() {
+  return Intl.getCurrentLocale() == 'ar';
 }

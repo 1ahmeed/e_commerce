@@ -158,3 +158,4 @@ class CancelOrderFailedState extends HomeState {
 
   CancelOrderFailedState({this.errorMessage});
 }
+

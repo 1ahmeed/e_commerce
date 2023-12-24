@@ -28,7 +28,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
         Uri.parse("https://student.valuxapps.com/api/profile"),
         headers: {
           "Authorization": token!,
-          "lang": "en",
+          "lang": checkArabic()?"ar":"en",
           "Content-Type": "application/json"
         },
       );
@@ -56,7 +56,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     try {
       Response response = await http.put(
         Uri.parse("https://student.valuxapps.com/api/update-profile"),
-        headers: {"lang": "en", "Authorization": token!},
+        headers: {"lang": checkArabic()?"ar":"en", "Authorization": token!},
         body: {
           "name": name,
           "email": email,
@@ -92,7 +92,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
       Response response=await http.post(
           Uri.parse("https://student.valuxapps.com/api/change-password") ,
         headers: {
-            "lang":"en",
+          "lang": checkArabic()?"ar":"en",
           // "Content-Type":"application/json",
           "Authorization":token!
         },
@@ -117,14 +117,6 @@ class ProfileCubit extends Cubit<ProfileStates> {
     }
   }
 
-
-  void signOut(context) {
-    CacheNetwork.removeData(key: 'token').then((value){
-      if(value==true){
-        navigatorAndFinish(context, LoginScreen());
-      }
-    });
-  }
 
   IconData suffix= Icons.visibility;
   bool isPassword=true;
@@ -152,7 +144,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     try {
       Response response =await http.post(Uri.parse("https://student.valuxapps.com/api/complaints"),
       headers: {
-        "lang":"ar",
+        "lang": checkArabic()?"ar":"en",
       },
         body: {
         "name":name,
