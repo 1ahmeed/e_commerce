@@ -1,11 +1,12 @@
-import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
-import 'package:e_commerce/screens/home/cubit/home_state.dart';
-import 'package:e_commerce/screens/order/widget/build_order_item.dart';
+
+import 'package:e_commerce/widgets/build_order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/utils/colors.dart';
-import '../../generated/l10n.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class OrderScreen extends StatelessWidget {
               title:  Text(S.of(context).yourOrder),
               elevation: 0,
               backgroundColor: Colors.transparent,
-              foregroundColor: mainColor,
+              foregroundColor: AppColor.mainColor,
             ),
             body: HomeCubit.get(context)!.orderModel != null ?
             Padding(

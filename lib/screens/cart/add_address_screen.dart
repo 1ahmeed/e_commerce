@@ -1,13 +1,13 @@
 
 import 'package:e_commerce/models/address/address_model.dart';
-import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
-import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/utils/colors.dart';
-import '../../generated/l10n.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 
 class AddAddressScreen extends StatelessWidget {
   AddAddressScreen({Key? key, this.dataOfAddress,}) : super(key: key);
@@ -33,7 +33,7 @@ class AddAddressScreen extends StatelessWidget {
             title: Text(S.of(context).newAddress),
             elevation: 0,
             backgroundColor: Colors.transparent,
-            foregroundColor: mainColor,
+            foregroundColor:AppColor. mainColor,
           ),
           body: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -74,9 +74,21 @@ class AddAddressScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
+                            style: Theme.of(context).textTheme.bodyMedium,
                             hintText: S.of(context).yourName,
-                            border: const OutlineInputBorder(),
-                            enabledBorder: const OutlineInputBorder(),
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
+                            labelStyle: Theme.of(context).textTheme.bodyMedium,
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            border:  const OutlineInputBorder(),
                             label: S.of(context).name,
                             controller: nameController,
                             validate: (value) {
@@ -85,6 +97,7 @@ class AddAddressScreen extends StatelessWidget {
                               }
                               return null;
                             },
+
                           ),
                         ),
                         const SizedBox(
@@ -102,8 +115,21 @@ class AddAddressScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            border:  const OutlineInputBorder(),
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
+                            labelStyle: Theme.of(context).textTheme.bodyMedium,
                             hintText: S.of(context).nameOfYourCity,
                             label: S.of(context).city,
                             controller: cityController,
@@ -131,8 +157,20 @@ class AddAddressScreen extends StatelessWidget {
 
                         Expanded(
                           child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            border:  const OutlineInputBorder(),
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
+                            labelStyle: Theme.of(context).textTheme.bodyMedium,
                             hintText: S.of(context).nameOfYourRegion,
                             label: S.of(context).region,
                             controller: regionController,
@@ -159,8 +197,20 @@ class AddAddressScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            border:  const OutlineInputBorder(),
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
+                            labelStyle: Theme.of(context).textTheme.bodyMedium,
                             hintText:S.of(context).detailsOfYourRegion,
                             label: S.of(context).details,
                             controller: detailsController,
@@ -188,8 +238,20 @@ class AddAddressScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextFormField(
-                            enabledBorder: const OutlineInputBorder(),
-                            border: const OutlineInputBorder(),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            enabledBorder:  OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).textTheme.bodyMedium!.color!
+                                )
+                            ),
+                            border:  const OutlineInputBorder(),
+                            hintStyle: Theme.of(context).textTheme.bodyMedium,
+                            labelStyle: Theme.of(context).textTheme.bodyMedium,
                             hintText: S.of(context).yourNotes,
                             label: S.of(context).note,
                             maxLines: 5,

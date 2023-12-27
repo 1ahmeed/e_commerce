@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/local_data.dart';
 import 'package:e_commerce/screens/auth_screen/login_screen.dart';
-import 'package:e_commerce/screens/onboarding_screen/widget/build_boarding_item.dart';
+import 'package:e_commerce/widgets/build_boarding_item.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -63,7 +63,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               submit();
               },
           child:const  Text("SKIP",
-        style: TextStyle(fontSize: 18,color: mainColor),)
+        style: TextStyle(fontSize: 18,color:AppColor.mainColor),)
           ),
         ],
       ),
@@ -102,7 +102,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       dotDecoration: DotDecoration(
                         width: 32,
                         height: 12,
-                        color: mainColor,
+                        color: AppColor.mainColor,
                         rotationAngle: 180,
                         verticalOffset: -10,
                         borderRadius: BorderRadius.circular(24),
@@ -120,7 +120,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     count: boarding.length),
                 const Spacer(),
                 FloatingActionButton(
-                  backgroundColor: mainColor,
+                  backgroundColor: AppColor.mainColor,
                   onPressed: () {
                     if (isLast) {
                       submit();

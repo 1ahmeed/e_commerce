@@ -1,12 +1,12 @@
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:e_commerce/screens/cart/add_address_screen.dart';
-import 'package:e_commerce/screens/cart/widget/build_address_item.dart';
-import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
-import 'package:e_commerce/screens/home/cubit/home_state.dart';
+import 'package:e_commerce/widgets/build_address_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../generated/l10n.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 
 
 class OrderAddressScreen extends StatelessWidget {
@@ -53,7 +53,7 @@ class OrderAddressScreen extends StatelessWidget {
                 title:  Text(S.of(context).chooseYourAddress),
                 elevation: 0,
                 backgroundColor: Colors.transparent,
-                foregroundColor: mainColor,
+                foregroundColor: AppColor.mainColor,
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
@@ -61,7 +61,7 @@ class OrderAddressScreen extends StatelessWidget {
                     builder: (context) => AddAddressScreen(),));
 
                 },
-                backgroundColor: mainColor,
+                backgroundColor: AppColor.mainColor,
 
 
                 child: const Icon(Icons.add),

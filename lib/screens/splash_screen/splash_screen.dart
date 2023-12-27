@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/constant.dart';
 import '../../core/local_data.dart';
+import '../../core/utils/colors.dart';
+import '../../cubit/layout_cubit/layout_cubit.dart';
 import '../auth_screen/login_screen.dart';
 import '../layout/layout_screen.dart';
 import '../onboarding_screen/onboarding_screen.dart';
@@ -47,10 +49,14 @@ class _SplashScreenState extends State<SplashScreen> {
           Directionality(
               textDirection: TextDirection.ltr,
               child: Expanded(child: Center(
-                  child: SvgPicture.asset("images/logo.svg")))),
+                  child: SvgPicture.asset("images/logo.svg",
+                     colorFilter: ColorFilter.mode(
+                      LayoutCubit.get(context)!.isDark?AppColor.mainColor:AppColor.white,
+                  BlendMode.srcIn), )
+              ))),
 
-           const Text(
-           "Made by ahmed tarek", style: TextStyle(color: Colors.grey),)
+            Text(
+           "Made by ahmed tarek", style: TextStyle(color: Theme.of(context).textTheme.bodySmall!.color),)
         ],
       ),
     );

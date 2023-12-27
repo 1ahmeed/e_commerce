@@ -1,10 +1,10 @@
-import 'package:e_commerce/screens/home/widget/build_product_item.dart';
+import 'package:e_commerce/widgets/build_product_item.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../generated/l10n.dart';
-import 'cubit/home_cubit.dart';
-import 'cubit/home_state.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,35 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-
-        // if(state is AddOrRemovingFromFavouritesSuccessState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.green,
-        //       duration: const Duration(seconds: 3),
-        //
-        //       content: Text(state.successMessage)));
-        // }
-        // else if(state is AddOrRemovingFromFavouritesFailedState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.red,
-        //       duration: const Duration(seconds: 3),
-        //       content: Text(state.errorMessage)));
-        // }
-        // if(state is AddOrRemovingFromCartSuccessState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.green,
-        //       duration: const Duration(seconds: 3),
-        //
-        //       content: Text(state.successMessage)));
-        //
-        // }
-        // else if(state is AddOrRemovingFromCartFailedState){
-        //   ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-        //       backgroundColor: Colors.red,
-        //       duration: const Duration(seconds: 3),
-        //       content: Text(state.errorMessage)));
-        //
-        // }
       },
       builder: (context, state) {
         return Scaffold(
@@ -72,10 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   HomeCubit.get(context)!.getProductAfterFiltered(input: value);
                 },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon:  Icon(Icons.search,color: Theme.of(context).iconTheme.color,),
                   hintText: S.of(context).search,
+                  hintStyle: Theme.of(context).textTheme.bodySmall,
                   suffixIcon: IconButton(
-                      icon: const Icon(Icons.clear),
+                      icon:  Icon(Icons.clear,color: Theme.of(context).iconTheme.color),
                       onPressed: () {
                        setState(() {
                          searchController.text = "";
@@ -84,14 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       }),
                   filled: true,
                   fillColor: Colors.black12.withOpacity(0.1),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      borderSide: const BorderSide(color: Colors.grey)),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 17),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(50),
+                  enabledBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).textTheme.bodyMedium!.color!
+                      )
                   ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).textTheme.bodyMedium!.color!
+                      )
+                  ),
+                  border:  const OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 17),
                 ),
               ),
 
@@ -130,15 +106,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     S.of(context).categories,
-                    style: const TextStyle(
-                        color: mainColor,
+                    style:  TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     S.of(context).viewAll,
                     style: const TextStyle(
-                        color: secondColor,
+                        color: AppColor.secondColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),
@@ -181,15 +157,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     S.of(context).products,
-                    style: const TextStyle(
-                        color: mainColor,
+                    style:  TextStyle(
+                        color: Theme.of(context).textTheme.bodyLarge!.color,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     S.of(context).viewAll,
                     style: const TextStyle(
-                        color: secondColor,
+                        color: AppColor.secondColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),

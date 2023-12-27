@@ -44,7 +44,7 @@ class DialogUtils{
       },
           child: Text(
             posActionTitle,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -60,7 +60,7 @@ class DialogUtils{
 
       },
           child: Text(negActionTitle,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -80,7 +80,7 @@ class DialogUtils{
 
              */
             content: Text(message,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold
               ),
@@ -112,7 +112,7 @@ class DialogUtils{
       },
           child: Text(
             posActionTitle,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -128,7 +128,7 @@ class DialogUtils{
 
       },
           child: Text(negActionTitle,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
@@ -183,7 +183,7 @@ class DialogUtils{
                 children: [
 
                   Text(buttonName),
-                  Spacer(),
+                  const Spacer(),
                   const SizedBox( width: 20.0,),
                   Icon(
                       icon

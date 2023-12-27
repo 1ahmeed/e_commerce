@@ -1,5 +1,3 @@
-import 'package:e_commerce/screens/auth_screen/cubit/auth_cubit.dart';
-import 'package:e_commerce/screens/auth_screen/cubit/auth_state.dart';
 import 'package:e_commerce/screens/auth_screen/login_screen.dart';
 import 'package:e_commerce/screens/layout/layout_screen.dart';
 import 'package:e_commerce/core/utils/colors.dart';
@@ -9,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/constant.dart';
 import '../../core/local_data.dart';
-import '../../generated/l10n.dart';
+import '../../cubit/auth_cubit/auth_cubit.dart';
+import '../../cubit/auth_cubit/auth_state.dart';
+import '../../localization/generated/l10n.dart';
 
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({Key? key}) : super(key: key);
@@ -28,14 +28,17 @@ final passwordController=TextEditingController();
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) =>   LayoutScreen(),));
         }else if(state is RegisterFailedState){
+          // showDialog(context: context, builder: builder)
           showDialog(context: context,  builder: (context) => AlertDialog(
-            content: Text(state.errorMessage,style: const TextStyle(color: Colors.white),),
+            content: Text(state.errorMessage,
+              style: const TextStyle(color: Colors.white),),
             backgroundColor: Colors.red,
           ),);
         }
       },
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: Colors.white,
           body: Center(
             child: SingleChildScrollView(
               child: Padding(
@@ -51,7 +54,7 @@ final passwordController=TextEditingController();
                               .textTheme
                               .headlineMedium
                               ?.copyWith(
-                            color: mainColor,
+                            color: AppColor.mainColor,
                             fontWeight: FontWeight.bold,
                           )),
                       Text(
@@ -141,7 +144,7 @@ final passwordController=TextEditingController();
                           }
 
                         },
-                        color: mainColor,
+                        color:AppColor. mainColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4)
                         ),
@@ -151,7 +154,7 @@ final passwordController=TextEditingController();
                         child:  Text(
                           ///todo
                           state is RegisterLoadingState?
-                          "loading....":S.of(context).register,style:
+                          "${S.of(context).loading}....":S.of(context).register,style:
                         const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
 
                       ),
@@ -168,7 +171,7 @@ final passwordController=TextEditingController();
                             {
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  LoginScreen()));
                             },
-                            child:  Text(S.of(context).login,style: const TextStyle(color: mainColor,fontWeight: FontWeight.bold)),
+                            child:  Text(S.of(context).login,style: const TextStyle(color: AppColor.mainColor,fontWeight: FontWeight.bold)),
                           )
                         ],
                       )

@@ -1,6 +1,4 @@
 import 'package:e_commerce/core/constant.dart';
-import 'package:e_commerce/screens/layout/cubit/layout_cubit.dart';
-import 'package:e_commerce/screens/layout/cubit/layout_state.dart';
 import 'package:e_commerce/screens/order/order_screen.dart';
 import 'package:e_commerce/screens/profile/cahnge_password_screen.dart';
 import 'package:e_commerce/core/utils/colors.dart';
@@ -11,7 +9,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../generated/l10n.dart';
+import '../../cubit/layout_cubit/layout_cubit.dart';
+import '../../cubit/layout_cubit/layout_state.dart';
+import '../../localization/generated/l10n.dart';
 import '../contact_us/contact_us_screen.dart';
 import '../profile/profile_screen.dart';
 
@@ -26,13 +26,12 @@ class LayoutScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = LayoutCubit.get(context);
         return AdvancedDrawer(
-          backdropColor: HexColor('#21618C'),
+          backdropColor:LayoutCubit.get(context)!.isDark?HexColor('#21618C'):AppColor.mainColor,
           controller: _advancedDrawerController,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
           animateChildDecoration: true,
           rtlOpening: false,
-          // openScale: 1.0,
           disabledGestures: false,
           childDecoration: const BoxDecoration(
 
@@ -53,13 +52,15 @@ class LayoutScreen extends StatelessWidget {
                        textDirection: TextDirection.ltr,
                        child: SvgPicture.asset(
                          "images/logo.svg",height: 100,
-                         width: 70,color: Colors.white,),
+                         width: 70,
+                         colorFilter: const ColorFilter.mode(AppColor.white, BlendMode.srcIn),
+                         ),
                      ),
                     const Spacer(),
 
+                    ///profile screen
                     ListTile(
                       onTap: () {
-                        ///profile screen
                         Navigator.push(context, MaterialPageRoute(builder:
                             (context) => ProfileScreen(),) );
                       },
@@ -74,12 +75,11 @@ class LayoutScreen extends StatelessWidget {
                       ),
                     ),
 
+                    ///localization
                     ListTile(
                       onTap: () {
-                        ///localization
                         LayoutCubit.get(context)!.changeLang();
-
-                      },
+                         },
                       leading: const Icon(
                         Icons.language,
                       ),
@@ -91,9 +91,25 @@ class LayoutScreen extends StatelessWidget {
                       ),
                     ),
 
+                    ///dark mode
                     ListTile(
                       onTap: () {
-                        ///change password
+                        LayoutCubit.get(context)!.changeMode();
+                      },
+                      leading:  Icon(
+                        LayoutCubit.get(context)!.isDark?Icons.dark_mode:Icons.light_mode,
+                      ),
+                      title:  Text(
+                        LayoutCubit.get(context)!.isDark? S.of(context).dark:S.of(context).light,
+                        style:  const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+
+                    ///change password
+                    ListTile(
+                      onTap: () {
                         Navigator.push(context,MaterialPageRoute(builder:
                             (context) => ChangePasswordScreen(),) );
                       },
@@ -127,7 +143,6 @@ class LayoutScreen extends StatelessWidget {
                     //const SizedBox(height: 16),
 
                     ///Help
-
                     ListTile(
                       onTap: () {
                         Navigator.push(context,MaterialPageRoute(builder:
@@ -169,7 +184,13 @@ class LayoutScreen extends StatelessWidget {
               title: Directionality(
                 textDirection: TextDirection.ltr,
                 child: SvgPicture.asset("images/logo.svg",
-                  height: 40,width: 40,color: mainColor,),
+                  height: 40,width: 40,
+                  colorFilter: ColorFilter.mode(
+                      LayoutCubit.get(context)!.isDark?AppColor.mainColor:AppColor.white,
+                      BlendMode.srcIn),
+
+
+                ),
               ),
               leading: IconButton(
                 onPressed:(){
@@ -184,7 +205,7 @@ class LayoutScreen extends StatelessWidget {
                         value.visible
                             ? IconlyBroken.close_square
                             : IconlyBroken.more_square,
-                        color: Colors.black,
+                        color: LayoutCubit.get(context)!.isDark?AppColor.black:AppColor.white,
                         key: ValueKey<bool>(value.visible),
                       ),
                     );
@@ -194,9 +215,6 @@ class LayoutScreen extends StatelessWidget {
             ),
             body:cubit?.screens![cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
-
-              selectedItemColor: mainColor,
-              unselectedItemColor: Colors.grey,
               type: BottomNavigationBarType.fixed,
               currentIndex: cubit!.currentIndex,
               onTap: (index) {

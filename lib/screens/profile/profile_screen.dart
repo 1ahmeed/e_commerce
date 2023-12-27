@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
-import '../../generated/l10n.dart';
-import 'cubit/profile_cubit.dart';
-import 'cubit/profile_states.dart';
+import '../../cubit/profile_cubit/profile_cubit.dart';
+import '../../cubit/profile_cubit/profile_states.dart';
+import '../../localization/generated/l10n.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
           appBar: AppBar(
             title:  Text(S.of(context).update),
             elevation: 0,
-            foregroundColor: mainColor,
+            foregroundColor: AppColor.mainColor,
             backgroundColor: Colors.transparent,
           ),
             body: ProfileCubit.get(context)!.profileModel != null
@@ -61,7 +61,21 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
-                      border: const OutlineInputBorder(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      border:  const OutlineInputBorder(),
+                      colorIconPrefix: Theme.of(context).iconTheme.color ,
                       controller: nameController,
                       keyboard: TextInputType.name,
                       validate: (String? value) {
@@ -77,8 +91,21 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
-                      border: const OutlineInputBorder(),
-
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      border:  const OutlineInputBorder(),
+                      colorIconPrefix: Theme.of(context).iconTheme.color ,
                       controller: emailController,
                       keyboard: TextInputType.emailAddress,
                       validate: (String? value) {
@@ -94,8 +121,21 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomTextFormField(
-                      border: const OutlineInputBorder(),
-                      controller: phoneController,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      enabledBorder:  OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).textTheme.bodyMedium!.color!
+                          )
+                      ),
+                      border:  const OutlineInputBorder(),
+                      colorIconPrefix: Theme.of(context).iconTheme.color ,                      controller: phoneController,
                       keyboard: TextInputType.phone,
                       validate: (String? value) {
                         if (value!.isEmpty) {
@@ -110,7 +150,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 20,
                     ),
                     CustomButton(
-                      background: mainColor,
+                      background: AppColor.mainColor,
                         function: () {
                           if (formKey.currentState!.validate()) {
                             ProfileCubit.get(context)?.updateUserData(

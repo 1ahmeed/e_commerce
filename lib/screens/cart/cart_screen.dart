@@ -1,12 +1,12 @@
 
-import 'package:e_commerce/screens/cart/widget/build_cart_item.dart';
-import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
-import 'package:e_commerce/screens/home/cubit/home_state.dart';
+import 'package:e_commerce/widgets/build_cart_item.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../generated/l10n.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 import 'order_address_screen.dart';
 
 class CartScreen extends StatelessWidget {
@@ -44,9 +44,9 @@ class CartScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text(S.of(context).total, style: const TextStyle(color:  Colors.black,fontSize: 20),),
+                     Text(S.of(context).total, style: const TextStyle(fontSize: 20),),
                     Text(
-                      "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(color:  Colors.black,fontSize: 20),),
+                      "${HomeCubit.get(context)!.total.toString()}\$",style: const TextStyle(fontSize: 20),),
                   ],
                 ),
                 const SizedBox(height: 20,),
@@ -61,7 +61,7 @@ class CartScreen extends StatelessWidget {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: mainColor,
+                          color: AppColor.mainColor,
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child:  Row(

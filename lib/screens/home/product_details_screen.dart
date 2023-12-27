@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/core/utils/colors.dart';
 import 'package:e_commerce/screens/cart/cart_screen.dart';
-import 'package:e_commerce/screens/home/cubit/home_cubit.dart';
-import 'package:e_commerce/screens/home/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../generated/l10n.dart';
+import '../../cubit/home_cubit/home_cubit.dart';
+import '../../cubit/home_cubit/home_state.dart';
+import '../../localization/generated/l10n.dart';
 import '../../models/product/products_data.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -21,9 +21,8 @@ class ProductDetailsScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.white,
           appBar: AppBar(
-            foregroundColor: mainColor,
+            foregroundColor: AppColor.mainColor,
             elevation: 0,
             backgroundColor: Colors.transparent,
             title:  Text(S.of(context).details),
@@ -43,7 +42,6 @@ class ProductDetailsScreen extends StatelessWidget {
                           children: [
                             CachedNetworkImage(
                               width: 250,
-
                               height: 250,
                               imageUrl: productsData!.image.toString(),
                               fit: BoxFit.fill,
@@ -96,8 +94,8 @@ class ProductDetailsScreen extends StatelessWidget {
                       Text(
                         productsData!.name!,
                         maxLines: 5,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        style:  TextStyle(
+                            color: Theme.of(context).textTheme.bodyMedium!.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             overflow: TextOverflow.ellipsis),
@@ -106,8 +104,8 @@ class ProductDetailsScreen extends StatelessWidget {
                       Text(
                         productsData!.description!,
                         maxLines: 50,
-                        style: const TextStyle(
-                            color: Colors.black,
+                        style:  TextStyle(
+                            color: Theme.of(context).textTheme.bodyMedium!.color,
                             fontSize: 18,
                             overflow: TextOverflow.ellipsis),
                       ),
@@ -123,7 +121,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           productId:productsData!.id!);
                     },
                         child:HomeCubit.get(context)!.favouritesId[productsData!.id]! ?
-                        const Icon(Icons.favorite_outlined,color: Colors.red,):
+                         Icon(Icons.favorite_outlined,color: Colors.red.shade700,):
                         const Icon(Icons.favorite_border_outlined,color: Colors.grey,)
                     ),
                     const SizedBox(width: 20,),

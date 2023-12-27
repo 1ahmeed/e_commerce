@@ -1,12 +1,14 @@
 import 'package:e_commerce/core/constant.dart';
-import 'package:e_commerce/screens/profile/cubit/profile_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import '../../core/component/custom_bottom.dart';
 import '../../core/component/custom_text_form_field.dart';
 import '../../core/utils/colors.dart';
-import '../../generated/l10n.dart';
-import 'cubit/profile_cubit.dart';
+import '../../cubit/layout_cubit/layout_cubit.dart';
+import '../../cubit/profile_cubit/profile_cubit.dart';
+import '../../cubit/profile_cubit/profile_states.dart';
+import '../../localization/generated/l10n.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   ChangePasswordScreen({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class ChangePasswordScreen extends StatelessWidget {
             title:Text(S.of(context).changePassword),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            foregroundColor: mainColor,
+            foregroundColor: AppColor.mainColor,
           ),
           body: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -46,10 +48,25 @@ class ChangePasswordScreen extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTextFormField(
-                    border: const OutlineInputBorder(),
                     controller: currentPasswordController,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    hintStyle: Theme.of(context).textTheme.bodyMedium,
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
+                    enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).textTheme.bodyMedium!.color!
+                        )
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).textTheme.bodyMedium!.color!
+                        )
+                    ),
+                    border:  const OutlineInputBorder(),
+                    colorIconSuffix: Theme.of(context).iconTheme.color ,
                     keyboard: TextInputType.number,
                     suffixIcon: ProfileCubit.get(context)?.suffix,
+
                     suffixPressed: () {
                       ProfileCubit.get(context)?.changeVisibility();
                     },
@@ -67,7 +84,21 @@ class ChangePasswordScreen extends StatelessWidget {
                     height: 20,
                   ),
                   CustomTextFormField(
-                    border: const OutlineInputBorder(),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    hintStyle: Theme.of(context).textTheme.bodyMedium,
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
+                    colorIconSuffix: Theme.of(context).iconTheme.color ,
+                    enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).textTheme.bodyMedium!.color!
+                        )
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).textTheme.bodyMedium!.color!
+                        )
+                    ),
+                    border:  const OutlineInputBorder(),
                     controller: newPasswordController,
                     keyboard: TextInputType.number,
                     suffixIcon: ProfileCubit.get(context)?.suffix2,
@@ -88,7 +119,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     height: 20,
                   ),
                   CustomButton(
-                      background: mainColor,
+                      background:LayoutCubit.get(context)!.isDark?HexColor('#21618C'):AppColor.mainColor ,
                       function: () {
                         if (formKey.currentState!.validate()) {
                           if (currentPasswordController.text.trim() ==

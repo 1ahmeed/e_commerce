@@ -3,24 +3,29 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({super.key,
     required this.controller,
-     this.keyboard,
-     this.validate,
+    this.keyboard,
+    this.validate,
     this.onSubmit,
     this.onchange,
     this.onTap,
-     this.label,
+    this.label,
     this.isClickable = true,
-     this.prefixIcon,
+    this.prefixIcon,
     this.suffixPressed,
     this.suffixIcon,
     this.isPassword = false,
+    this.hintText,
     // this.colorBorder,
-    this.colorIcon,
+    this.colorIconPrefix,
     this.enabledBorder,
     this.focusedBorder,
     this.border,
-    this.hintText,
-    this.maxLines
+    this.labelStyle,
+    this.maxLines,
+    this.hintStyle,
+    this.style,
+    this.colorIconSuffix,
+    this.disabledBorder
   });
 
   final TextEditingController controller;
@@ -39,15 +44,21 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
   final InputBorder? border;
-  final Color? colorIcon;
+  final Color? colorIconPrefix;
+  final Color? colorIconSuffix;
   final String? hintText;
   final int? maxLines;
-
+  final TextStyle? hintStyle;
+  final TextStyle? labelStyle;
+  final TextStyle? style;
+  final InputBorder? disabledBorder;
   // Color? colorBorder;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
+      style: style,
       controller: controller,
       keyboardType: keyboard,
       obscureText: isPassword,
@@ -57,24 +68,27 @@ class CustomTextFormField extends StatelessWidget {
       onTap: onTap,
       // cursorColor: Colors.teal,
       validator: validate,
-      maxLines:maxLines ,
+      maxLines: maxLines,
       decoration: InputDecoration(
-
-        hintText:hintText ,
-        labelStyle: const TextStyle(),
+        hintStyle:hintStyle,
+        hintText: hintText,
+        labelStyle:labelStyle,
         enabledBorder: enabledBorder,
         // const OutlineInputBorder(
         //     borderSide: BorderSide())
-        focusedBorder:focusedBorder ,
+        focusedBorder: focusedBorder,
         // const OutlineInputBorder(
         //     borderSide: BorderSide())
+        disabledBorder: disabledBorder,
         labelText: label,
         prefixIcon: Icon(
           prefixIcon,
-          color: colorIcon,
+          color: colorIconPrefix,
         ),
         suffixIcon: IconButton(
-          icon: Icon(suffixIcon),
+          icon: Icon(suffixIcon,
+          color:colorIconSuffix ,
+          ),
           onPressed: suffixPressed,
         ),
         border: border,
